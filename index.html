@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GLITCH X</title>
+  <link rel="icon" type="image/png" href="images/headlogo.png">
+  
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+</head>
+<body>
+  
+  <main class="frame">
+    <header class="header animate-on-scroll">
+
+      <div class="brand">
+        <div class="logo">GLITCH</div>
+          <div class="search">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 21l-4.2-4.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2"/>
+              </svg>
+              <input id="searchInput" placeholder="Search"/>
+              <div id="searchResults" class="search-results"></div>
+          </div>
+        <div class="tech-icons">
+          <a href="#"><img src="images/htmlpng.png" alt="Icon 1" class="tech-icon-img"></a>
+          <a href="#"><img src="images/css.png" alt="Icon 2" class="tech-icon-img"></a>
+          <a href="#"><img src="images/github.png" alt="Icon 3" class="tech-icon-img"></a>
+          <a href="#"><img src="images/java.png" alt="Icon 4" class="tech-icon-img"></a>
+          <a href="#"><img src="images/python.png" alt="Icon 5" class="tech-icon-img"></a>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn">⚙️</button>
+        <button class="btn">v2.002</button>
+        <div class="menu-container">
+          <button class="btn primary menu-btn">
+            <svg width="24" height="24" viewBox="0 0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="dropdown-menu">
+            <div class="menu-header">v2.0830</div>
+            <div class="menu-grid">
+              <div class="main-menu">
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12.5L22 7.5zM15 20l-4-4"></path><path d="M11 16l4 4"></path></svg>Bugs</a>
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 12.5a.5.5 0 0 0-.5-.5H3a.5.5 0 0 0-.5.5v11a.5.5 0 0 0 .5.5H21a.5.5 0 0 0 .5-.5V12.5zM22 17H2"></path></svg>Clubs</a>
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>Discussions</a>
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>Games</a>
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>Generators</a>
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.5a2.5 2.5 0 0 0 0-5v-1a2.5 2.5 0 0 0-2.5-2.5h-1a2.5 2.5 0 0 0-5 0h-1a2.5 2.5 0 0 0-2.5-2.5v-1a2.5 2.5 0 0 0-5 0h-1a2.5 2.5 0 0 0 0 5v1a2.5 2.5 0 0 0 2.5 2.5h1a2.5 2.5 0 0 0 5 0h1a2.5 2.5 0 0 0 2.5 2.5v1a2.5 2.5 0 0 0 5 0z"></path></svg>Ideas</a>
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 12h3v8h6v-6h2v6h6v-8h3z"></path></svg>Initiatives</a>
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>Members</a>
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 12h3v8h6v-6h2v6h6v-8h3z"></path></svg>Studios</a>
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V5H6.5A2.5 2.5 0 0 0 4 7.5v12z"></path><path d="M22 21H6.5A2.5 2.5 0 0 1 4 18.5V4h16a2 2 0 0 1 2 2v13z"></path></svg>Wikis</a>
+              </div>
+              <div class="extra-menu">
+                <div class="menu-header">Projects</div>
+                <a href="borg.html" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M16 16s-1.5-2-4-2s-4 2-4 2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>Optimizer</a>
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="12" y1="17" x2="12" y2="21"></line><line x1="8" y1="21" x2="16" y2="21"></line><path d="M7 8h.01"></path><path d="M10 8h.01"></path><path d="M13 8h.01"></path><path d="M16 8h.01"></path></svg>Key board</a>
+                <div class="menu-header">Additional</div>
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 17a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2zM12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"></path></svg>Models</a>
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>Reviews</a>
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v3h3"></path><path d="M18 3h3v3"></path><path d="M15 15l6-6"></path><path d="M9 9l-6 6"></path></svg>Status Updates</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="content">
+       
+      <article class="hero animate-on-scroll">
+
+        <h1>
+    <span>We Will Bring</span>
+    <span>Your Imagination</span>
+    <span>To Life</span>
+  </h1>
+         <div class="intro-text animate-on-scroll">
+
+    <span>Hi I am</span>
+    <span class="orange-text">Jnim</span>
+  </div>
+<div id="loader-wrapper">
+        <div id="loader"></div>
+    </div>
+        
+        <div class="model"></div>
+        <div class="tag t1"><span class="dot"></span> Our Creative Brain</div>
+        <div class="tag t2"><span class="dot"></span> Our Diligent Heart</div>
+        <div class="tag t3"><span class="dot"></span> Our Strong Body</div>
+        <h1>
+          <span>We Will Bring</span>
+          <span>Your Imagination</span>
+          <span>To Life</span>
+        </h1>
+        <aside class="gif-box animate-on-scroll">
+
+    <div class="card gif-card">
+      <div class="gif-wrapper">
+        <img src="images/cube.gif" alt="Cube Animation">
+      </div>
+      <div class="meta">
+        <div class="title">CUBE BOT</div>
+        <div class="title">COMING SOON</div>
+      </div>
+    </div>
+  </aside>
+      </article>
+
+      
+      
+      
+
+      
+    </section>
+    
+
+    <section>
+  
+      <div class="swiper-container animate-on-scroll">
+
+        <h2 class="section-title"><span>Showcasing the projects I</span><span>developed on my own</span></h2>
+        <div class="swiper" id="projects-swiper">
+          <div class="swiper-wrapper">
+          <a href="borg.html" class="swiper-slide">
+              <div class="slide-content">
+                  <img src="images/GLITCH BORG.png"/>
+              </div>
+              <div class="overlay">
+                <div class="detail">
+                <h3>GLITCH BORG</h3>
+                <span>Pc Optimizer</span>
+                </div>
+              </div>
+            </a>
+            <div class="swiper-slide">
+              <div class="slide-content">
+                  <img src="images/1.png"/>
+              </div>
+              <div class="overlay">
+                <div class="detail">
+                  <h3>Lorem Dummy</h3>
+                  <span>Lorem Dummy Text</span>
+              </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="slide-content">
+               <img src="images/1.png"/>
+              </div>
+              <div class="overlay">
+                <div class="detail">
+                  <h3>Lorem Dummy</h3>
+                  <span>Lorem Dummy Text</span>
+              </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="slide-content">
+                <img src="images/1.png"/>
+              </div>
+              <div class="overlay">
+                <div class="detail">
+                 <h3>Lorem Dummy</h3>
+                  <span>Lorem Dummy Text</span>
+              </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="slide-content">
+                <img src="images/1.png"/>
+              </div>
+              <div class="overlay">
+                <div class="detail">
+                  <h3>Lorem Dummy</h3>
+                  <span>Lorem Dummy Text</span>
+              </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="slide-content">
+                <img src="images/1.png"/>
+              </div>
+              <div class="overlay">
+                <div class="detail">
+                  <h3>Lorem Dummy</h3>
+                  <span>Lorem Dummy Text</span>
+              </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="swiper-button-prev projects-prev">
+          <i class='bx bx-left-arrow-alt'></i>
+        </div>
+        <div class="swiper-button-next projects-next">
+          <i class='bx bx-right-arrow-alt' ></i>
+        </div>
+
+        <div class="swiper-pagination projects-pagination"></div>
+      </div>
+
+    </section>
+    
+    <section class="updates-section animate-on-scroll">
+
+      <div class="updates-container">
+          <h2 class="updates-section-title">
+              <span>Future Updates</span>
+              <span>& Most Recent</span>
+          </h2>
+          <div class="swiper" id="updates-swiper">
+              <div class="swiper-wrapper">
+                  <div class="update-card swiper-slide">
+                      <div class="update-content">
+                          <img src="images/borg post.png" alt="Future Update 1">
+                      </div>
+                      <div class="overlay">
+                          <div class="detail">
+                              <h3>GLITCH BORG</h3>
+                              <span>Pc Optimizer</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="update-card swiper-slide">
+                      <div class="update-content">
+                          <img src="images/Comming Soon.png" alt="Future Update 2">
+                      </div>
+                      <div class="overlay">
+                          <div class="detail">
+                              <h3>Cube Ai</h3>
+                              <span>AI assistant Coming Soon</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="update-card swiper-slide">
+                      <div class="update-content">
+                          <img src="images/nono.png" alt="Future Update 3">
+                      </div>
+                      <div class="overlay">
+                          <div class="detail">
+                              <h3>error</h3>
+                              <span>error</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="swiper-button-next updates-next"></div>
+              <div class="swiper-button-prev updates-prev"></div>
+          </div>
+          <div class="swiper-pagination updates-pagination"></div>
+      </div>
+    </section>
+
+     <section class="discord-section">
+        <div class="discord-logo-left"></div>
+        <div class="discord-logo-right"></div>
+        <div class="discord-content">
+            <h2>Be part of our <span class="core-text">GLITCH</span> community!</h2>
+            <a href="https://discord.gg/fShA8Qha" class="discord-button">
+                <i class='bx bxl-discord-alt'></i> Join our Discord
+            </a>
+        </div>
+    </section>
+
+    <footer class="main-footer animate-on-scroll">
+
+    <div class="footer-container">
+        <div class="footer-top">
+            <div class="footer-logo">
+                <img src="images/glitch logo.png" alt="GLITCH CUBE AI Logo" class="footer-logo-image">
+            </div>
+            <div class="footer-links">
+                <h4>ABOUT</h4>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>INFO</h4>
+                <ul>
+                    <li><a href="#">Legal Notice</a></li>
+                    <li><a href="#">DMCA</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>GET THE APP</h4>
+                <div class="app-links">
+                    <a href="#"><img src="images/playstore.png" alt="Google Play"></a>
+                    <a href="#"><img src="images/appstore.png" alt="App Store"></a>
+                </div>
+            </div>
+        </div>
+        <hr class="footer-divider">
+        <div class="footer-bottom">
+            <div class="social-icons">
+                <a href="#"><i class='bx bxl-facebook'></i></a>
+                <a href="#"><i class='bx bxl-tiktok'></i></a>
+                <a href="#"><i class='bx bxl-instagram'></i></a>
+                <a href="#"><i class='bx bxl-linkedin'></i></a>
+            </div>
+            <p class="copyright">© 2025 Copyright: GLITCH X AI</p>
+        </div>
+    </div>
+  </footer>
+  </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.js"></script>
+  
+
+  <script src="js/script.js"></script>
+</body>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const scrollElements = document.querySelectorAll(".animate-on-scroll");
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+        } else {
+          entry.target.classList.remove("is-visible"); 
+        }
+      });
+    }, { threshold: 0.2 });
+
+    scrollElements.forEach(el => observer.observe(el));
+  });
+</script>
+
+</html>

@@ -1,0 +1,1077 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root{
+  --bg:#0d0f13;
+  --panel:#0f1217;
+  --muted:#161a21;
+  --text:#eef2f7;
+  --sub:#a7b0c0;
+  --pill:#0f1115;
+  --accent:#ff6a00;
+  --radius:24px;
+  --shadow:0 20px 60px rgba(0,0,0,55), 0 4px 10px rgba(0,0,0,35);
+}
+*, *::before, *::after{box-sizing:border-box}
+html,body{height:100%; margin:0; padding:0;}
+body{
+  /* === GameBanana style pixel retro bg === */
+  background-color: #0d1117; /* dark navy base */
+  background-image: 
+    linear-gradient(0deg, transparent 24%, rgba(233, 145, 73, 0.952) 25%, rgba(233, 145, 73, 0.952) 26%, transparent 27%, transparent 74%, rgba(233, 145, 73, 0.952) 75%, rgba(233, 145, 73, 0.952) 76%, transparent 77%, transparent),
+    linear-gradient(90deg, transparent 24%, rgba(233, 145, 73, 0.952) 25%, rgba(233, 145, 73, 0.952) 26%, transparent 27%, transparent 74%, rgba(233, 145, 73, 0.952) 75%, rgba(233, 145, 73, 0.952) 76%, transparent 77%, transparent);
+  background-size: 13px 13px; /* denser smaller pixel grid size */
+
+  color:var(--text);
+  font:500 1rem/1.5 "Inter", system-ui, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height:100vh;
+}
+.frame{
+
+  width:100%; max-width:1000px;
+  
+  background:var(--panel);
+  background-image: url('..');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius:28px;
+  box-shadow:var(--shadow);
+  position:relative;
+  min-height:95vh;
+  margin:30px;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+/* header */
+.header{
+  display:flex; 
+  align-items:center; 
+  justify-content:space-between; 
+  padding:18px 22px; 
+  gap:10px;
+  position: relative; /* මේක අලුතින් එකතු කරන්න */
+  z-index: 2; /* මේක අලුතින් එකතු කරන්න */
+}
+.brand{display:flex; align-items:center; gap:10px;}
+.logo{font-weight:700; letter-spacing:.24em; padding:8px 14px; border-radius:16px; background:#0b0d11; text-decoration: none; color: var(--text);}
+.search{
+  display:flex; 
+  align-items:center; 
+  gap:8px; 
+  padding:8px 12px; 
+  background:var(--pill); 
+  border-radius:999px;
+  border:1px solid var(--sub);
+}
+.search input{background:transparent; border:0; outline:0; color:var(--text); width:220px}
+.search:focus-within{
+  box-shadow: 0 0 0 1px var(--accent);
+}
+.actions{
+  display:flex; 
+  align-items:center; 
+  gap:10px;
+}
+
+/* Updated: Styles for the tech icons */
+.tech-icons {
+    display: flex;
+    gap: 12px;
+    margin-right: 10px;
+}
+.tech-icon-img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    transition: transform 0.2s ease-in-out;
+}
+.tech-icon-img:hover {
+    transform: scale(1.1);
+}
+
+.circle{width:40px; height:40px; display:grid; place-items:center; border-radius:50%; background:var(--pill);}
+.btn{background:#12151b; border:0; color:var(--text); padding:10px 16px; border-radius:999px; cursor:pointer;}
+.btn.primary{background:linear-gradient(135deg, #ff6a00, #ff3b0f);}
+
+/* New: Menu container */
+.menu-container {
+  position: relative;
+  z-index: 1;
+}
+
+/* New: Dropdown menu */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 550px;
+  background: var(--muted);
+  border: 1px solid var(--sub);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 10px;
+  margin-top: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+  z-index: 100;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 1rem;
+  
+}
+
+/* New: Show menu on hover */
+.menu-container:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Two-column layout */
+.menu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.main-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.extra-menu {
+    border-left: 1px dotted rgba(255, 255, 255, 0.1);
+    padding-left: 16px;
+}
+
+/* Header style for the first menu */
+.dropdown-menu .menu-header {
+  font-family: "Press Start 2P", sans-serif;
+  color: var(--sub);
+  font-size: 11px;
+  text-transform: uppercase;
+  padding: 8px 10px;
+  margin-top: 10px;
+  letter-spacing: 0.1em;
+}
+
+.dropdown-menu .menu-header:first-child {
+  margin-top: 0;
+  border-bottom: 0;
+}
+
+.dropdown-menu .menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+  color: var(--text);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+  font-size: 14px;
+}
+
+.dropdown-menu .menu-item svg {
+  color: var(--sub);
+  transition: color 0.2s;
+}
+
+.dropdown-menu .menu-item:hover {
+  background: rgba(255, 106, 0, 0.1);
+  color: var(--accent);
+}
+
+.dropdown-menu .menu-item:hover svg {
+  color: var(--accent);
+}
+
+/* layout grid */
+.content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+  gap: 24px;
+
+}
+
+/* hero */
+/* Hero Box එකට Gradient Animation එකක් එකතු කිරීම */
+@property --deg {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  max-width: 950px;
+  border-radius: 28px;
+  overflow: hidden;
+  min-height: 500px;
+  background: #0d1116;
+  margin-bottom: 70px;
+
+  /* මේ කොටස අලුතින් එකතු කරන්න */
+  background: conic-gradient(from var(--deg), #00c3ff, #4d0199, #6300c6, #00c3ff);
+  border-radius: 28px;
+  animation: autoRotate 2s linear infinite;
+  z-index: 1; /* අනෙකුත් elements වලට ඉහළින් තබන්න */
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* මේකෙන් animation එක හරියටම මැදට එනවා */
+  width: 1000px; /* animation එකේ ප්‍රමාණය හදාගන්න. ඕන නම් අඩු වැඩි කරන්න පුළුවන් */
+  height: 1000px; /* animation එකේ ප්‍රමාණය හදාගන්න. */
+  background: conic-gradient(from var(--deg), #f0550e, #91050c, #ec8712, #ffffff);
+  filter: blur(10px);
+  border-radius: 50%; /* animation එක රවුමක් විදිහට පෙන්වනවා */
+  animation: autoRotate 2s linear infinite;
+  z-index: -1; /* මේකෙන් animation එක model එක පිටිපස්සට යනවා */
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 2px; /* මෙය box එක ඇතුලට border එකක් වගේ පෙනෙන්නට උදව් වෙයි */
+    background: #0d1116; /* පසුබිමේ වර්ණය */
+    border-radius: inherit;
+    z-index: -1;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: conic-gradient(from var(--deg), #f0550e, #91050c, #ec8712, #ffffff);
+    filter: blur(10px); /* බොඳවූ පෙනුමක් ලබා දෙයි */
+    border-radius: inherit;
+    animation: autoRotate 2s linear infinite;
+    z-index: -2;
+}
+
+/* Animation එක සඳහා @keyframes එක */
+@keyframes autoRotate {
+  to {
+    --deg: 360deg;
+  }
+}
+.hero .model{
+  position:absolute; inset:0;
+  background:
+     url("../images/hero.png") right 130px bottom -360px / 900px no-repeat, /* මේ line එක එකතු කරන්න */
+    radial-gradient(700px 300px at 60% 10%, rgba(255,106,0,25), transparent 65%),
+    radial-gradient(350px 180px at 80% 70%, rgba(122,126,255,25), transparent 65%);
+   
+}
+.tag{
+  position:absolute; 
+  backdrop-filter:blur(6px); 
+  background:rgba(10,12,16,6);
+  border-radius:12px; 
+  box-shadow:0 8px 24px rgba(0,0,0,4), inset 0 0 0 1px rgba(255,255,255,08);
+  padding:10px 12px; color:var(--sub); font-size:13px;
+}
+
+.hero h1{
+  position:absolute; left:36px; bottom:-10px; 
+  font-size:42px;
+  line-height:1.1; letter-spacing:.04em;
+  text-transform:uppercase; max-width:540px; font-weight:800;
+}
+.hero h1 span{display:block;}
+
+/* right column - new container */
+.right-column{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  align-items:flex-start;
+  min-height:450px;
+  width: 100%;
+}
+
+/* intro text */
+.intro-text{
+  font-family: "Press Start 2P", sans-serif;
+  font-size: 2.5rem; 
+  font-weight: 400;
+  text-align: left; 
+  color:white;
+  text-transform: uppercase;
+  line-height:1.2;
+  width: 100%;
+  margin-top: 30px;
+}
+.intro-text span{display:block;}
+.orange-text{
+  color: var(--accent);
+}
+
+/* gif box */
+.gif-box{
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  z-index: 10; /* අනෙකුත් elements වලට ඉහළින් පෙන්වීමට */
+  max-width: 230px; /* අවශ්‍ය පළලක් තියාගන්න */
+
+}
+.gif-card{
+  width:100%; max-width:230px;
+  border-radius:22px; 
+  background:var(--muted); 
+  box-shadow:var(--shadow); 
+  overflow:hidden; 
+}
+.gif-wrapper{
+  aspect-ratio:1.1/1;
+  background:
+    
+    linear-gradient(180deg, #0d1116, #0b0e13);
+  display:flex; align-items:center; justify-content:center;
+}
+.gif-wrapper img{
+  max-width:130%; max-height:130%; 
+  object-fit:cover; border-radius:18px;
+}
+.meta{
+  display:flex; align-items:center; justify-content:space-between; 
+  padding:10px 12px;
+}
+.meta .title{font-weight:700; font-size:14px;}
+.price{font-weight:800; font-size:14px;}
+
+/* "contact" class එක සම්පූර්ණයෙන්ම අයින් කරනවා */
+.contact{
+  display: none; 
+}
+
+/* responsive breakpoints */
+@media (max-width:1200px){
+  .content{grid-template-columns:1fr;}
+  .right-column{flex-direction:row; justify-content:space-between; align-items:center; gap:20px;}
+  .intro-text{width:100%; max-width:300px; text-align:left;}
+  .hero{min-height:400px;}
+  .hero h1{font-size:32px}
+  .gif-box{bottom:20px; right:20px; gap:8px;}
+  .swiper-container{padding-bottom:10px !important;}
+  .swiper-pagination{bottom:-10px !important;}
+}
+@media (max-width:768px){
+  .hero{min-height:280px;}
+  .hero h1{font-size:24px}
+  .intro-text{font-size:18px}
+  .gif-box{bottom:10px; right:10px; gap:6px;}
+  .gif-card{max-width:180px;}
+  .gif-wrapper{aspect-ratio:1.1/1;}
+  .meta .title, .price{font-size:12px;}
+}
+
+/* --- Swiper Card Styles --- */
+
+
+.swiper-container {
+  width: 90%;
+  margin: 0 auto;
+  padding-bottom: 50px;
+  position: relative;
+}
+
+/* --- Swiper Title Styles --- */
+.section-title {
+  font-family: "Press Start 2P", sans-serif;
+  color: var(--text);
+  font-size: 1.5rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  line-height: 1.5;
+  text-align: center; /* This centers the text */
+}
+
+/* Swiper Card එකට Blur Effect එකක් එකතු කිරීම */
+
+/* Default state: Blur the non-active slides */
+.swiper-slide:not(.swiper-slide-active) {
+  filter: blur(5px);
+  transform: scale(0.85);
+  opacity: 0.6;
+}
+
+/* Active slide: Remove the blur and make it clear */
+.swiper-slide.swiper-slide-active {
+  filter: blur(0);
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Add a transition for a smooth effect */
+.swiper-slide {
+  transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.section-title span {
+  display: block;
+}
+.swiper-slide {
+  width: 200px; 
+  height: 280px; 
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transform: scale(0.9);
+  transition: transform 0.3s ease-in-out;
+}
+.swiper-slide-active {
+  transform: scale(1);
+}
+
+.swiper-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  padding: 20px;
+  /* Me line eken .overlay eka yata indan udata gannawa */
+  transform: translateY(100%);
+  transition: transform 0.4s ease-in-out;
+}
+
+/* Me line eka add karanna, etakota active wena slide eke witharak text eka penanwa */
+.swiper-slide-active .overlay {
+  transform: translateY(0);
+}
+
+.detail {
+  color: var(--text);
+}
+
+.detail h3 {
+  font-size: 1rem; /* Slightly reduced font size for title */
+  margin: 0 0 5px;
+}
+
+.detail span {
+  font-size: 0.8rem; /* Slightly reduced font size for subtitle */
+  color: var(--sub);
+}
+
+/* --- Custom Swiper Navigation Button Styles for projects section --- */
+.projects-prev, .projects-next {
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 50% !important;
+    background-color: white !important;
+    color: black !important;
+    top: 50% !important; /* Keep the vertical position */
+    transform: translateY(-50%) !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+
+.projects-prev::after, .projects-next::after {
+    content: '→' !important;
+    position: absolute;
+    text-indent: 0 !important;
+    font-size: 30px !important;
+    font-weight: 900;
+}
+
+.projects-prev::after {
+    content: '←' !important;
+}
+
+.projects-prev:hover, .projects-next:hover {
+    background-color: #f0f0f0 !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Custom Swiper Navigation Button Styles for updates section --- */
+.updates-prev, .updates-next {
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50% !important;
+  background-color: white !important;
+  color: black !important;
+  top: 70% !important;
+  transform: translateY(-50%) !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+
+.updates-prev::after, .updates-next::after {
+  content: '→' !important;
+  position: absolute;
+  text-indent: 0 !important;
+  font-size: 30px !important;
+  font-weight: 900;
+}
+
+.updates-prev::after {
+  content: '←' !important;
+}
+
+.updates-prev:hover, .updates-next:hover {
+  background-color: #f0f0f0 !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Swiper Pagination (Dots) */
+.swiper-pagination {
+    position: relative !important;
+    bottom: -20px !important; /* Adjust this value to move the dots down */
+    text-align: center !important;
+}
+.swiper-pagination-bullet {
+  background: var(--sub) !important;
+  opacity: 1 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--accent) !important;
+}
+
+
+/* Larger Card Styles */
+.swiper-slide .large-card {
+  width: 100%;
+  height: 400px; /* ඔබට අවශ්‍ය උස මෙතනින් වෙනස් කරන්න පුළුවන් */
+}
+
+/* Text and Gradient Overlay */
+.overlay-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    color: var(--text);
+    text-align: center;
+    
+    /* Orange Gradient එක */
+    background: linear-gradient(to bottom, rgba(255, 106, 0, 0.5), transparent);
+    
+    /* Text එක උඩින් තියන්න z-index එකක් දානවා */
+    z-index: 2;
+}
+
+.update-title {
+    font-family: "Press Start 2P", sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0;
+}
+/* --- Updates & Recent Section --- */
+
+.updates-section {
+    padding: 50px 0;
+}
+.updates-container {
+    max-width: 960px;
+    margin: auto;
+    padding: 20px;
+    border-radius: var(--radius);
+    background: var(--panel);
+}
+.updates-section-title {
+    font-family: "Press Start 2P", sans-serif;
+    color: var(--text);
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1.5;
+    text-align: center;
+    margin-bottom: 30px;
+}
+.updates-section-title span {
+    display: block;
+}
+.update-card {
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease-in-out;
+    width: 100%;
+    height: 100%;
+}
+.update-card:hover {
+    transform: translateY(-5px);
+}
+.update-card img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+/* --- New Discord Section --- */
+
+/* --- New Discord Section --- */
+
+.discord-section {
+    position: relative;
+    width: 100%;
+    padding: 60px 20px;
+    margin-top: 50px;
+    border-radius: var(--radius);
+    background-color: #1a1e23;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Background image imitation */
+.discord-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/bg.jpg'); /* Replace this with your own wave-pattern image URL */
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.1;
+    z-index: 1;
+}
+
+.discord-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 600px;
+}
+
+.discord-section h2 {
+    font-family: "Press Start 2P", sans-serif;
+    color: var(--text);
+    font-size: 2rem;
+    line-height: 1.2;
+    margin: 0 0 20px;
+}
+
+.core-text {
+    color: var(--accent); /* Yellow-orange color for "CORE" */
+}
+
+.discord-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border: 2px solid var(--accent);
+    border-radius: 999px;
+    background-color: transparent;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.discord-button:hover {
+    background-color: var(--accent);
+    color: var(--panel);
+}
+
+.discord-button i {
+    font-size: 24px;
+}
+
+/* Discord Logos on the side */
+/* වම් පැත්තේ logo එක වෙනම ලොකු කළා */
+.discord-logo-left {
+    position: absolute;
+    width: 220px; /* ලොකු කළා */
+    height: 220px; /* ලොකු කළා */
+    opacity: 0.6;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 1;
+    pointer-events: none;
+    background-image: url('../images/dis3.png');
+    left: -30px;
+    top: 20%;
+    
+}
+
+/* දකුණු පැත්තේ logo එක කලින් ප්‍රමාණයෙන් තබා ඇත */
+.discord-logo-right {
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    opacity: 0.6;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 1;
+    pointer-events: none;
+    background-image: url('../images/dis2.png');
+    right: -40px;
+    top: 0%;
+    
+}
+
+/* --- New Footer Section --- */
+.main-footer {
+    background-color: #0d0f13;
+    color: var(--sub);
+    padding: 60px 20px 20px;
+    font-size: 0.9rem;
+}
+
+.footer-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-basis: 250px;
+}
+
+.logo-text {
+    font-family: "Press Start 2P", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(to right, #eef2f7, #ff6a00);
+}
+
+.footer-logo p {
+    font-family: "Press Start 2P", sans-serif;
+    font-size: 0.8rem;
+    color: var(--text);
+    margin-top: 5px;
+}
+
+.footer-links {
+    flex: 1;
+    min-width: 150px;
+}
+
+.footer-links h4 {
+    font-family: "Press Start 2P", sans-serif;
+    font-size: 0.9rem;
+    color: var(--text);
+    margin-bottom: 20px;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 10px;
+}
+
+.footer-links ul li a {
+    color: var(--sub);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-links ul li a:hover {
+    color: var(--text);
+}
+
+.app-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.app-links img {
+    height: 40px;
+    transition: transform 0.2s;
+}
+
+.app-links img:hover {
+    transform: scale(1.05);
+}
+
+.footer-divider {
+    border: none;
+    border-top: 1px solid var(--muted);
+    opacity: 0.5;
+    margin: 40px 0;
+}
+
+.footer-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    text-align: center;
+}
+
+.social-icons {
+    display: flex;
+    gap: 20px;
+}
+
+.social-icons a {
+    color: var(--sub);
+    font-size: 1.5rem;
+    transition: color 0.2s;
+}
+
+.social-icons a:hover {
+    color: var(--text);
+}
+
+.copyright {
+    margin: 0;
+    color: var(--sub);
+}
+
+/* Mobile responsive styles */
+@media (min-width: 768px) {
+    .footer-bottom {
+        flex-direction: row;
+    }
+}
+
+.hero .intro-text {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  text-align: right; /* මේ අලුත් line එක එකතු කරන්න */
+}
+
+.tags-wrapper {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 20px;
+  z-index: 10;
+}
+
+.tag {
+  position: absolute;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  backdrop-filter: blur(6px);
+  background: rgba(10, 12, 16, 0.6);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  padding: 10px 12px;
+}
+
+.tag .dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent);
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.tag.t1 {
+  top: 30px;
+  right: 600px;
+}
+
+.tag.t2 {
+  top: 55%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+}
+
+.tag.t3 {
+  bottom: 230px;
+  left: 530px;
+}
+
+#animation-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+}
+
+#loader {
+    display: block;
+    position: relative;
+    width: 400px; /* මේක වෙනස් කරන්න */
+    height: 400px; /* මේක වෙනස් කරන්න */
+    border-radius: 50%;
+    border: 14px solid transparent;
+    border-top-color: #fcfcfc;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 4s linear infinite;
+}
+
+#loader:before {
+    content: "";
+    position: absolute;
+    top: 20px;  /* මේක වෙනස් කරන්න */
+    left: 20px; /* මේක වෙනස් කරන්න */
+    right: 20px; /* මේක වෙනස් කරන්න */
+    bottom: 20px; /* මේක වෙනස් කරන්න */
+    border-radius: 50%;
+    border: 14px solid transparent;
+    border-top-color: #f9c922;
+    -webkit-animation: spin 3s linear infinite;
+    animation: spin 6s linear infinite;
+}
+#loader:after {
+    content: "";
+    position: absolute;
+    top: 40px; /* මේක වෙනස් කරන්න */
+    left: 40px; /* මේක වෙනස් කරන්න */
+    right: 40px; /* මේක වෙනස් කරන්න */
+    bottom: 40px; /* මේක වෙනස් කරන්න */
+    border-radius: 50%;
+    border: 14px solid transparent;
+    border-top-color: #e25f07;
+    -webkit-animation: spin 1.5s linear infinite;
+    animation: spin 3s linear infinite;
+}
+
+#loader-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 46%;
+  transform: translate(-50%, -50%);
+}
+
+@-webkit-keyframes spin {
+    0%   { 
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes spin {
+    0%   { 
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+/* Scroll Animation සඳහා අවශ්‍ය styles */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.footer-logo-image {
+  max-width: 250px; /* Adjust the size as needed */
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.search-results {
+    position: absolute;
+    top: 50px; /* search bar එකට පහළින් තැබීමට */
+    left: 80px; /* search bar එකට යටින් තැබීමට */
+    width: 220px; /* search bar එකේ පළලටම ගැලපීමට */
+    background: var(--pill);
+    border: 1px solid var(--sub);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    z-index: 1000; /* අනෙකුත් elements වලට ඉහළින් තැබීමට */
+    padding: 10px;
+    display: none; /* මුලදී නොපෙන්වීමට */
+    flex-direction: column;
+}
+
+.search-results a {
+    color: var(--text);
+    text-decoration: none;
+    padding: 8px 10px;
+    border-radius: 8px;
+    transition: background 0.2s, color 0.2s;
+    font-size: 14px;
+}
+
+.search-results a:hover {
+    background: rgba(255, 106, 0, 0.1);
+    color: var(--accent);
+}
+
+.search-results a.search-result-item {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* logo එකයි text එකයි අතර පරතරය */
+}
+
+.search-results .result-logo {
+    width: 24px; /* logo එකේ පළල */
+    height: auto; /* auto height */
+}

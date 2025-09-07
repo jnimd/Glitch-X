@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GLITCH BORG</title>
+   <link rel="icon" type="image/png" href="images/headlogo.png">
+  
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="css/style.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+  <style>
+    /* New styles for the content sections */
+    @font-face {
+      font-family: 'Press Start 2P';
+      src: url('PressStart2P-Regular.ttf') format('truetype'); /* Adjust path if needed */
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    .retro-pixel-heading {
+        font-family: 'Press Start 2P', cursive; /* Fallback to cursive if font not loaded */
+        color: var(--accent);
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 1.8em; /* Adjust size as needed */
+        text-shadow: 2px 2px 0px rgba(0,0,0,0.5); /* Optional: add a subtle shadow */
+    }
+
+    .content-section {
+        padding: 20px;
+        margin-top: 30px; /* Increased margin for better spacing */
+        background: var(--panel);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        position: relative; /* Needed for absolute positioning of image */
+    }
+    .content-section h3 {
+        color: var(--accent);
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        font-size: 1.5em; /* Adjust size as needed */
+        font-family: 'Press Start 2P', cursive; /* Retro pixel font */
+        text-shadow: 1px 1px 0px rgba(0,0,0,0.5); /* Optional: add a subtle shadow */
+    }
+    .content-section p {
+        color: var(--sub);
+        line-height: 1.6;
+    }
+    .content-section ul {
+        list-style: none;
+        padding: 0;
+        color: var(--sub);
+    }
+    .content-section ul li {
+        margin-bottom: 10px;
+        line-height: 1.6;
+        padding-left: 20px; /* Indent list items */
+        position: relative;
+    }
+    .content-section ul li::before {
+        content: '▶'; /* Retro bullet point */
+        color: var(--accent);
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    .content-section ul li strong {
+        color: var(--text);
+    }
+    .download-section {
+        text-align: center;
+        margin: 50px 0;
+    }
+    .download-section a.btn {
+        background: var(--accent);
+        color: var(--text);
+        padding: 15px 30px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        font-family: 'Press Start 2P', cursive; /* Retro pixel font for button */
+        font-size: 1.1em;
+    }
+    .download-section a.btn:hover {
+        background: #ff8b33;
+    }
+
+   .tweaks-image-wrapper {
+    position: relative;
+    padding-left: 45%; /* Make space for the image */
+    margin-top: 20px;
+    }
+
+    .tweaks-image {
+        position: absolute;
+        top: 0;
+        left: -10%; /* Move it slightly outside the box to the left */
+        max-width: 45%; /* Keep the image size manageable */
+        height: auto;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+    }
+
+    /* New class to manage the text content */
+    .tweaks-content {
+        margin-left: 10px; /* Adjust the spacing if needed */
+    }
+
+    /* Adjusting list item styling for better alignment */
+    .content-section ul li {
+        margin-bottom: 10px;
+        line-height: 1.6;
+        padding-left: 20px;
+        position: relative;
+        margin-left: 0; /* Make sure margin is reset */
+    }
+
+    .content-section ul li::before {
+        content: '▶';
+        color: var(--accent);
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    /* New Flexbox Layout for the Tweaks section */
+.tweaks-layout {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.tweaks-image-in-box {
+    width: 45%; /* Adjust image size to fit inside the box */
+    height: auto;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.tweaks-content {
+    flex: 1; /* This makes the content take up the remaining space */
+}
+.admin-warning {
+    background-color: var(--muted);
+    border: 2px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+    text-align: left;
+}
+
+.admin-warning p {
+    font-family: "Inter", system-ui, sans-serif; /* Normal font */
+    color: #f7d2d2; /* Light red color */
+    font-size: 0.9em;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.admin-warning h4 {
+    font-family: 'Press Start 2P', cursive; /* Pixel font for the title */
+    color: var(--accent);
+    text-transform: uppercase;
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+.warning-icon {
+    margin-right: 10px;
+}
+
+.admin-warning strong {
+    color: var(--accent);
+}
+
+@media (max-width: 768px) {
+    .admin-warning p, .admin-warning h4 {
+        font-size: 0.8em;
+    }
+}
+  </style>
+</head>
+<body>
+  
+  <main class="frame">
+    <header class="header">
+      <div class="brand">
+        <a href="index.html" class="logo">GLITCH</a>
+        <div class="search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21 21l-4.2-4.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <input placeholder="Search"/>
+        </div>
+        <div class="tech-icons">
+          <a href="#"><img src="images/htmlpng.png" alt="Icon 1" class="tech-icon-img"></a>
+          <a href="#"><img src="images/css.png" alt="Icon 2" class="tech-icon-img"></a>
+          <a href="#"><img src="images/github.png" alt="Icon 3" class="tech-icon-img"></a>
+          <a href="#"><img src="images/java.png" alt="Icon 4" class="tech-icon-img"></a>
+          <a href="#"><img src="images/python.png" alt="Icon 5" class="tech-icon-img"></a>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn">⚙️</button>
+        <button class="btn">v2.002</button>
+        <div class="menu-container">
+          <button class="btn primary menu-btn">
+            <svg width="24" height="24" viewBox="0 0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="dropdown-menu">
+            <div class="menu-header">v2.0830</div>
+            <div class="menu-grid">
+              <div class="main-menu">
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12.5L22 7.5zM15 20l-4-4"></path><path d="M11 16l4 4"></path></svg>Bugs</a>
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 12.5a.5.5 0 0 0-.5-.5H3a.5.5 0 0 0-.5.5v11a.5.5 0 0 0 .5.5H21a.5.5 0 0 0 .5-.5V12.5zM22 17H2"></path></svg>Clubs</a>
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>Discussions</a>
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>Games</a>
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>Generators</a>
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.5a2.5 2.5 0 0 0 0-5v-1a2.5 2.5 0 0 0-2.5-2.5h-1a2.5 2.5 0 0 0-5 0h-1a2.5 2.5 0 0 0-2.5-2.5v-1a2.5 2.5 0 0 0-5 0h-1a2.5 2.5 0 0 0 0 5v1a2.5 2.5 0 0 0 2.5 2.5h1a2.5 2.5 0 0 0 5 0h1a2.5 2.5 0 0 0 2.5 2.5v1a2.5 2.5 0 0 0 5 0z"></path></svg>Ideas</a>
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 12h3v8h6v-6h2v6h6v-8h3z"></path></svg>Initiatives</a>
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>Members</a>
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 12h3v8h6v-6h2v6h6v-8h3z"></path></svg>Studios</a>
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V5H6.5A2.5 2.5 0 0 0 4 7.5v12z"></path><path d="M22 21H6.5A2.5 2.5 0 0 1 4 18.5V4h16a2 2 0 0 1 2 2v13z"></path></svg>Wikis</a>
+              </div>
+              <div class="extra-menu">
+                <div class="menu-header">Projects</div>
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M16 16s-1.5-2-4-2s-4 2-4 2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>Optimizer</a>
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="12" y1="17" x2="12" y2="21"></line><line x1="8" y1="21" x2="16" y2="21"></line><path d="M7 8h.01"></path><path d="M10 8h.01"></path><path d="M13 8h.01"></path><path d="M16 8h.01"></path></svg>Key board</a>
+                <div class="menu-header">Additional</div>
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 17a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2zM12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"></path></svg>Models</a>
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>Reviews</a>
+                <a href="#" class="menu-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v3h3"></path><path d="M18 3h3v3"></path><path d="M15 15l6-6"></path><path d="M9 9l-6 6"></path></svg>Status Updates</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="content" style="padding: 50px;">
+      <div style="text-align: center;">
+        <h2 class="retro-pixel-heading animate-on-scroll">GLITCH BORG: PC Optimizer</h2>
+        <p class="animate-on-scroll">This GLITCH BORG software is designed to optimize your PC. The software has various functions grouped into sections that you can run one by one. For the best result, it's recommended to run each task individually. Here are the details of each section.</p>
+        <img src="images/BORG.PNG" alt="GLITCH BORG first interface" class="animate-on-scroll" style="max-width: 100%; height: auto; margin-top: 20px; border-radius: var(--radius); box-shadow: var(--shadow);">
+      </div>
+      <div class="admin-warning animate-on-scroll">
+        <h4 class="warning-title"><span class="warning-icon">⚠️</span> Important Note: Run as Administrator</h4>
+        <p>For optimal performance and to ensure all features function correctly, you must <strong>run this application as an administrator</strong>.</p>
+        <p>To do this, after downloading the <code>.exe</code> file, simply <strong>right-click</strong> on the file and select <strong>"Run as administrator."</strong> When prompted by User Account Control (UAC), click <strong>"Yes"</strong> to allow the application to make changes to your device.</p>
+     </div>
+
+      <h2 class="retro-pixel-heading animate-on-scroll" style="margin-top: 50px;">Follow These Instructions for Optimal Performance</h2>
+      
+      <div class="content-section animate-on-scroll">
+        <h3>1. System Preparation</h3>
+        <p>This section is designed to ensure your PC's safety. Before performing any optimization, it's recommended to run these tasks.</p>
+        <ul>
+          <li><strong>Create System Restore Point:</strong> If any issue arises, this feature helps you revert the PC to its previous good condition.</li>
+          <li><strong>Run Windows Safety Check:</strong> This feature checks if all the basic system files on your PC are correctly in place.</li>
+          <li><strong>Install Visual C++ Redistributables:</strong> This helps install the libraries needed to run applications like games.</li>
+          <li><strong>Remove Virtual Effects:</strong> This feature helps improve PC speed by removing your PC's visual effects.</li>
+        </ul>
+      </div>
+       <div class="content-section animate-on-scroll">
+    <div class="tweaks-layout">
+        <img src="images/BORG2.PNG" alt="GLITCH BORG Tweak interface" class="tweaks-image-in-box">
+        
+        <div class="tweaks-content">
+            <h3>2. Tweaks</h3>
+            <p>This section helps boost advanced performance. Select and run these options carefully.</p>
+            <ul>
+                <li><strong>CPU Tweak:</strong> This helps increase your CPU's performance.</li>
+                <li><strong>Memory Tweak:</strong> This helps improve PC speed by optimizing RAM usage.</li>
+                <li><strong>Services Tweak:</strong> You can use this option to remove unnecessary services and improve PC performance.</li>
+                <li><strong>Network Tweak:</strong> This helps optimize your internet connection speed.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+      <div class="content-section animate-on-scroll">
+        <h3>3. System Cleanup</h3>
+        <p>This section helps you remove all the unnecessary files on your PC. It's recommended to run these tasks regularly.</p>
+        <ul>
+          <li><strong>Clean Temporary Files:</strong> Remove all temporary files in Windows.</li>
+          <li><strong>Clean Registry:</strong> Clean the unnecessary registry entries on the PC.</li>
+          <li><strong>Clean Browser Cache:</strong> Remove the cache files in your web browsers.</li>
+          <li><strong>Clean Junk Files:</strong> This feature helps increase your disk space.</li>
+        </ul>
+      </div>
+
+      <div class="content-section animate-on-scroll">
+        <h3>4. Performance Boost</h3>
+        <p>This section helps improve your PC's overall performance.</p>
+        <ul>
+          <li><strong>One-Click Full Optimization:</strong> This task automatically runs all common optimization tasks.</li>
+          <li><strong>Enable Power Boost:</strong> This task helps create and activate a custom power plan. It switches your PC to a high-performance mode.</li>
+        </ul>
+        <p><strong>Note:</strong> Instead of running the One-Click Full Optimization, performing the tasks you want one by one helps you optimize your PC in a customized way. This approach also gives you more control over what you are doing.</p>
+      </div>
+
+      <div class="download-section animate-on-scroll">
+        <h3 class="retro-pixel-heading">Download GLITCH BORG</h3>
+        <a href="https://github.com/jnimd/glitch-borg/releases/download/v1.0/Glitch.Borg.exe" class="btn">Download .exe</a>
+      </div>
+    </section>
+
+    <footer class="main-footer">
+      <div class="footer-container">
+        <div class="footer-top">
+          <div class="footer-logo">
+            <img src="images/glitch logo.png" alt="GLITCH CUBE AI Logo" class="footer-logo-image">
+          </div>
+          <div class="footer-links">
+            <h4>ABOUT</h4>
+            <ul>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Support</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-links">
+            <h4>INFO</h4>
+            <ul>
+              <li><a href="#">Legal Notice</a></li>
+              <li><a href="#">DMCA</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Cookie Policy</a></li>
+            </ul>
+          </div>
+          <div class="footer-links">
+            <h4>GET THE APP</h4>
+            <div class="app-links">
+              <a href="#"><img src="images/playstore.png" alt="Google Play"></a>
+              <a href="#"><img src="images/appstore.png" alt="App Store"></a>
+            </div>
+          </div>
+        </div>
+        <hr class="footer-divider">
+        <div class="footer-bottom">
+          <div class="social-icons">
+            <a href="#"><i class='bx bxl-facebook'></i></a>
+            <a href="#"><i class='bx bxl-tiktok'></i></a>
+            <a href="#"><i class='bx bxl-instagram'></i></a>
+            <a href="#"><i class='bx bxl-linkedin'></i></a>
+          </div>
+          <p class="copyright">© 2025 Copyright: GLITCH X AI</p>
+        </div>
+      </div>
+    </footer>
+  </main>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("is-visible");
+                } else {
+                    entry.target.classList.remove("is-visible");
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll(".animate-on-scroll").forEach((element) => {
+            observer.observe(element);
+        });
+    });
+</script>
+
+</body>
+</html>
