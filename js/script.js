@@ -128,3 +128,36 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// Get the menu button and menu container
+const menuBtn = document.querySelector('.menu-btn');
+const menuContainer = document.querySelector('.menu-container');
+
+// Use a single event listener on the document to manage all menu interactions
+document.addEventListener('click', (event) => {
+  // Check if the clicked element is the menu button itself or a descendant of it
+  const isMenuBtnClicked = menuBtn.contains(event.target);
+  
+  // Check if the clicked element is inside the menu container
+  const isInsideMenu = menuContainer.contains(event.target);
+
+  // If the menu button was clicked, we toggle the menu's state
+  if (isMenuBtnClicked) {
+    menuBtn.classList.toggle('active');
+    menuContainer.classList.toggle('active');
+  } 
+  // If the menu is open and the click was outside the menu (and not on the button), close it
+  else if (menuContainer.classList.contains('active') && !isInsideMenu) {
+    menuBtn.classList.remove('active');
+    menuContainer.classList.remove('active');
+  }
+});
+
+// If you want the menu to close when a link is clicked
+const menuItems = document.querySelectorAll('.dropdown-menu .menu-item');
+menuItems.forEach(item => {
+  item.addEventListener('click', () => {
+    menuBtn.classList.remove('active');
+    menuContainer.classList.remove('active');
+  });
+});
