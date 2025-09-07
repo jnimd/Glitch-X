@@ -1075,3 +1075,304 @@ body{
     width: 24px; /* logo එකේ පළල */
     height: auto; /* auto height */
 }
+
+@media (max-width: 768px) {
+
+  /* Frame smaller and centered */
+  .frame {
+    width: 92%;
+    padding: 10px;
+    border-radius: 12px;
+    margin: 0 auto;
+  }
+
+  /* Header stack neatly */
+  .header {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+  }
+  .logo {
+    font-size: 1rem;
+    padding: 6px 10px;
+  }
+  .search input {
+    width: 80%;
+    max-width: 240px;
+    font-size: 0.9rem;
+  }
+
+  /* Hero section tidy */
+  .hero {
+    padding: 14px;
+    border-radius: 14px;
+    text-align: center;
+    min-height: 720px; /* increase height */
+    position: relative;
+  }
+
+  /* Intro-text at top center */
+  .hero .intro-text {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.95rem;
+    margin: 0;
+    text-align: center;
+    max-width: 90%;
+  }
+
+  /* Headline at bottom center */
+  .hero h1 {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.4rem;
+    line-height: 1.3;
+    max-width: 90%;
+    margin: 0;
+    text-align: center;
+  }
+  .hero .model {
+    background-position: left 60% bottom;
+    background-size: 200%;
+  }
+
+  /* Gif box centered smaller */
+  .gif-box {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    max-width: 100px;
+    margin: 0;
+  }
+  .gif-wrapper img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Tags reduced size */
+  .tag {
+    font-size: 0.65rem;
+    padding: 4px 6px;
+  }
+  .tag.t1 { top: 6%; right: 6%; }
+  .tag.t2 { top: 38%; left: 50%; transform: translateX(-50%); }
+  .tag.t3 { bottom: 8%; left: 50%; transform: translateX(-50%); }
+
+  /* ----- Project Swiper ----- */
+  .projects .swiper-container {
+    padding-bottom: 24px;
+  }
+  .projects .swiper-slide {
+    width: 90% !important;   /* single card full width */
+    height: auto !important;
+    margin: 0 auto 20px;
+    border-radius: 14px;
+  }
+  .projects h2 {
+    font-size: 1.4rem;
+    margin-bottom: 14px;
+    text-align: center;
+  }
+
+
+
+  /* ----- Future Updates ----- */
+  .updates .swiper-container {
+    padding-bottom: 24px;
+  }
+  .updates .swiper-slide {
+    width: 92% !important;   /* single card centered */
+    height: auto !important;
+    margin: 0 auto 20px;
+    border-radius: 16px;
+    padding: 18px;
+    font-size: 1rem;
+  }
+  .updates h2 {
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+
+
+
+
+
+
+   /* ----- Hero rotate animation smaller on mobile ----- */
+  .hero::after {
+    animation: rotateSmallMobile 18s linear infinite;
+  }
+
+  @keyframes rotateSmallMobile {
+    from {
+      transform: rotate(0deg) scale(1.03);
+    }
+    to {
+      transform: rotate(6deg) scale(1.03); /* smaller tilt */
+    }
+  }
+}
+
+  
+  @media (max-width: 768px) {
+  /*
+  Mobile එකේදී desktop navigation එක සම්පූර්ණයෙන්ම hide කරමු.
+  */
+  .header .nav-links {
+    display: none;
+  }
+  
+  /*
+  Menu button එක සෑම විටම පෙනෙන්න සලස්වමු, අනිත් items වලට උඩින්.
+  */
+  .menu-btn {
+    display: block; /* Make sure the button is always visible */
+    z-index: 1000;
+  }
+
+  /*
+  Header එකේ තියෙන අනිත් buttons ටික hide කරමු.
+  */
+  .header .search,
+  .header .user-menu {
+    display: none;
+  }
+
+  /*
+  Drop-down menu එක header එක යටින් පෙන්වන්න.
+  */
+  .menu-container .dropdown-menu {
+    position: absolute; 
+    top: 100%; /* header එකට යටින් පටන් ගන්න */
+    right: 0;
+    width: 250px; 
+    max-height: calc(100vh - 60px); /* Screen එකට වඩා ලොකු වෙන්න නොදී ඉමු */
+    overflow-y: auto; /* Menu items ගොඩක් තිබ්බොත් scroll කරන්න පුළුවන් */
+    background-color: var(--panel); 
+    z-index: 999;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    
+    /* මුලින්ම hide කරලා තියමු */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px); 
+    transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  /*
+  JavaScript එකෙන් 'active' class එක add කරාම menu එක පෙන්වන්න.
+  */
+  .menu-container.active .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /*
+  Drop-down menu එකේ items වලට styles දාමු.
+  */
+  .dropdown-menu .menu-grid {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 5px;
+  }
+  
+  .dropdown-menu .menu-item {
+    background-color: transparent;
+    border-radius: 0;
+    padding: 10px 15px;
+    font-size: 1rem;
+    width: 100%;
+    transition: background-color 0.2s ease;
+  }
+
+  .dropdown-menu .menu-item:hover {
+    background-color: var(--muted);
+  }
+  
+  .menu-header {
+    font-size: 0.8rem;
+    padding: 12px 15px 5px;
+    text-align: left;
+  }
+
+  /* --- Borg HTML Page Specific Mobile Styles --- */
+  .retro-pixel-heading {
+      font-size: 1.2em;
+  }
+  .content-section {
+      padding: 15px;
+      margin-top: 20px;
+  }
+  
+  /* Tweaks layout එක mobile එකට හදනවා */
+  .tweaks-layout {
+      flex-direction: column; /* Items එක යට එක පෙන්නනවා */
+      gap: 20px;
+  }
+  .tweaks-text-content {
+      text-align: center; /* Text content එක center කරන්න */
+  }
+  .tweaks-image-in-box {
+      width: 100%;
+      height: auto;
+      margin-bottom: 0;
+  }
+  
+  /* Download button එක mobile එකට පොඩි කරනවා */
+  .download-btn {
+      width: auto;
+      padding: 8px 20px; /* Padding එක අඩු කරනවා */
+      font-size: 0.8rem; /* Font size එක පොඩි කරනවා */
+  }
+
+  /* Download buttons එක පේළියකට ගමු */
+  .app-links {
+      display: flex;
+      flex-direction: row; /* පේළියකට තියන්න */
+      justify-content: center; /* මැදට ගේන්න */
+      gap: 10px; /* buttons අතර පරතරය */
+      flex-wrap: nowrap;
+  }
+
+  .app-links img {
+      width: 100px; /* button images වල width එක අඩු කරමු */
+      height: auto;
+  }
+  
+  
+  .discord-section h2 {
+      font-size: 1.5rem; 
+  }
+  .discord-logo-left, .discord-logo-right {
+      display: none; 
+  }
+
+     
+  
+  .header .search {
+    display: flex; 
+    width: 100%; /* සම්පූර්ණ පළල ගන්න */
+    justify-content: center; /* මැදට ගේන්න */
+  }
+  
+  .header .search input {
+    width: 100%;
+  }
+
+}
