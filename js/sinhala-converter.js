@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
     'zga': 'ඟ', 'zja': 'ඦ', 'zda': 'ඬ', 'zdha': 'ඳ', 'zqa': 'ඳ', 'zha': 'ඥ',
     'zka': 'ඤ', 'Ba': 'ඹ', 'Lu': 'ළු',
     // --- Vowel Marks Combinations ---
-    'kAA': 'කෑ', 'gAA': 'ගෑ', 'cAA': 'චෑ', 'jAA': 'ජෑ', 'tAA': 'ටෑ', 'DAA': 'ඩෑ', 'thhAA': 'තෑ',
+    'kAA': 'කෑ', 'gAA': 'ගෑ', 'cAA': 'චෑ', 'jAA': 'ජෑ', 'tAA': 'ටෑ', 'DAA': 'ඩෑ', 'thAA': 'තෑ',
     'dhAA': 'දෑ', 'nAA': 'නෑ', 'NAA': 'ණෑ', 'pAA': 'පෑ', 'bAA': 'බෑ', 'mAA': 'මෑ', 'yAA': 'යෑ',
     'rAA': 'රෑ', 'lAA': 'ලෑ', 'LAA': 'ළෑ', 'wAA': 'වැ', 'vAA': 'වෑ', 'sAA': 'සෑ', 'shAA': 'ශෑ',
     'SAA': 'ෂෑ', 'hAA': 'හෑ', 'fAA': 'ෆෑ',
@@ -51,19 +51,22 @@ document.addEventListener("DOMContentLoaded", function() {
     'dhAa': 'දෑ', 'nAa': 'නෑ', 'NAa': 'ණෑ', 'pAa': 'පෑ', 'bAa': 'බෑ', 'mAa': 'මෑ', 'yAa': 'යෑ',
     'rAa': 'රෑ', 'lAa': 'ලෑ', 'LAa': 'ළෑ', 'wAa': 'වැ', 'vAa': 'වෑ', 'sAa': 'සෑ', 'shAa': 'ශෑ',
     'SAa': 'ෂෑ', 'hAa': 'හෑ', 'fAa': 'ෆෑ',
+    'kii': 'කී', 'gii': 'ගී', 'chii': 'චී', 'jii': 'ජී', 'tii': 'ටී', 'dii': 'ඩී', 'thii': 'තී', 'dhii': 'දී',
+    'nii': 'නී', 'Nii': 'ණී', 'pii': 'පී', 'bii': 'බී', 'mii': 'මී', 'yii': 'යී', 'rii': 'රී', 'lii': 'ලී',
+    'Lii': 'ළී', 'wii': 'වී', 'vii': 'වී', 'sii': 'සී', 'shii': 'ශී', 'Sii': 'ෂී', 'hii': 'හී', 'fii': 'ෆී',
     'kaa': 'කා', 'gaa': 'ගා', 'chaa': 'චා', 'jaa': 'ජා', 'taa': 'ටා', 'daa': 'ඩා', 'thhaa': 'ථා',
-    'dhha': 'ධා', 'naa': 'නා', 'Naa': 'ණා', 'paa': 'පා', 'baa': 'බා', 'maa': 'මා', 'yaa': 'යා',
+    'dhha': 'ධා', 'naa': 'නා', 'Naa': 'ණා', 'paa': 'පා', 'baa': 'බා', 'maa': 'මා', 'yaa': 'යා', 
     'raa': 'රා', 'laa': 'ලා', 'Laa': 'ළා', 'waa': 'වා', 'vaa': 'වා', 'saa': 'සා', 'shaa': 'ශා',
-    'Saa': 'ෂා', 'haa': 'හා', 'faa': 'ෆා', 'tha':'තා',
-    'kuu': 'කූ', 'guu': 'ගූ', 'chuu': 'චූ', 'juu': 'ජූ', 'tuu': 'ටූ', 'duu': 'ඩූ', 'thhuu': 'තූ',
+    'Saa': 'ෂා', 'haa': 'හා', 'faa': 'ෆා', 'thaa':'තා',
+    'kuu': 'කූ', 'guu': 'ගූ', 'chuu': 'චූ', 'juu': 'ජූ', 'tuu': 'ටූ', 'duu': 'ඩූ', 'thuu': 'තූ',
     'dhuu': 'දූ', 'nuu': 'නූ', 'Nuu': 'ණූ', 'puu': 'පූ', 'buu': 'බූ', 'muu': 'මූ', 'yuu': 'යූ',
     'ruu': 'රූ', 'luu': 'ලු', 'Luu': 'ළූ', 'wuu': 'වූ', 'vuu': 'වූ', 'suu': 'සු', 'shuu': 'ශූ',
     'Suu': 'ෂූ', 'huu': 'හූ', 'fuu': 'ෆු',
-    'kru': 'කෘ', 'gru': 'ගෘ', 'chru': 'චෘ', 'jru': 'ජෘ', 'tru': 'ටෘ', 'dru': 'ඩෘ', 'thhru': 'තෘ',
+    'kru': 'කෘ', 'gru': 'ගෘ', 'chru': 'චෘ', 'jru': 'ජෘ', 'tru': 'ටෘ', 'dru': 'ඩෘ', 'thru': 'තෘ',
     'dhru': 'දෘ', 'nru': 'නෘ', 'Nru': 'ණෘ', 'pru': 'පෘ', 'bru': 'බෘ', 'mru': 'මෘ', 'yru': 'යෘ',
     'rru': 'රෘ', 'lru': 'ලෘ', 'Lru': 'ළෘ', 'wru': 'වෘ', 'vru': 'වෘ', 'sru': 'සෘ', 'shru': 'ශෘ',
     'Sru': 'ෂෘ', 'hru': 'හෘ', 'fru': 'ෆෘ',
-    'kee': 'කේ', 'gee': 'ගේ', 'chee': 'චේ', 'jee': 'ජේ', 'tee': 'ටේ', 'dee': 'ඩේ', 'thhee': 'තේ',
+    'kee': 'කේ', 'gee': 'ගේ', 'chee': 'චේ', 'jee': 'ජේ', 'tee': 'ටේ', 'dee': 'ඩේ', 'thee': 'තේ',
     'dhee': 'දේ', 'nee': 'නේ', 'Nee': 'ණේ', 'pee': 'පේ', 'bee': 'බේ', 'mee': 'මේ', 'yee': 'යේ',
     'ree': 'රේ', 'lee': 'ලේ', 'Lee': 'ළේ', 'wee': 'වේ', 'vee': 'වේ', 'see': 'සේ', 'shee': 'ශේ',
     'See': 'ෂේ', 'hee': 'හේ', 'fee': 'ෆේ',
@@ -671,3 +674,4 @@ if (importButton && fileInput) {
 
 
    
+
