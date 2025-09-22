@@ -8,12 +8,15 @@
   --muted: #444444;
   --text: #ffffff;
   --sub: #aaaaaa;
-  --accent: #ff6a00; /* Orange color from the image */
+  --accent: #ff6a00;
+  /* Orange color from the image */
   --shadow: rgba(0, 0, 0, 0.3);
   --border-radius-main: 10px;
   --border-radius-sm: 5px;
-  --font-family-main: 'Arial', sans-serif; /* Or your site's main font */
-  --font-family-title: 'Press Start 2P', cursive; /* If you have a retro font */
+  --font-family-main: 'Arial', sans-serif;
+  /* Or your site's main font */
+  --font-family-title: 'Press Start 2P', cursive;
+  /* If you have a retro font */
 }
 
 /* Base Styles for the Converter Page */
@@ -21,7 +24,8 @@
   padding: 40px 20px;
   max-width: 1200px;
   margin: 0 auto;
-  min-height: calc(100vh - 200px); /* Adjust based on your header/footer height */
+  min-height: calc(100vh - 200px);
+  /* Adjust based on your header/footer height */
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -34,10 +38,12 @@
 }
 
 .converter-main-title {
-  font-family: var(--font-family-main); /* Using main font for general look */
+  font-family: var(--font-family-main);
+  /* Using main font for general look */
   font-weight: 800;
   color: var(--text);
-  font-size: 3rem; /* Adjust as needed */
+  font-size: 3rem;
+  /* Adjust as needed */
   margin-bottom: 10px;
 }
 
@@ -57,7 +63,8 @@
   gap: 10px;
   margin-bottom: 30px;
   position: relative;
-  z-index: 1; /* Ensure tabs are above the panel */
+  z-index: 1;
+  /* Ensure tabs are above the panel */
 }
 
 .tab-btn {
@@ -83,11 +90,14 @@
 }
 
 .tab-btn.active {
-  background-color: var(--secondary-bg); /* Match converter panel background */
+  background-color: var(--secondary-bg);
+  /* Match converter panel background */
   color: var(--text);
   border-color: var(--muted);
-  border-bottom-color: var(--secondary-bg); /* Hide bottom border to merge with panel */
-  transform: translateY(2px); /* Slight lift */
+  border-bottom-color: var(--secondary-bg);
+  /* Hide bottom border to merge with panel */
+  transform: translateY(2px);
+  /* Slight lift */
 }
 
 .tab-icon {
@@ -98,7 +108,8 @@
 
 /* Converter Panel (main content area) */
 .converter-panel {
-  background-color: var(--secondary-bg); /* Lighter than main background */
+  background-color: var(--secondary-bg);
+  /* Lighter than main background */
   border-radius: var(--border-radius-main);
   box-shadow: var(--shadow);
   padding: 30px;
@@ -175,7 +186,8 @@
   gap: 20px;
 }
 
-.input-area, .output-area {
+.input-area,
+.output-area {
   background-color: var(--panel);
   border: 1px solid var(--muted);
   border-radius: var(--border-radius-main);
@@ -201,13 +213,15 @@
 .accent-label {
   color: var(--accent);
 }
+
 .accent-icon {
   color: var(--accent) !important;
 }
 
 .converter-textarea {
   width: 100%;
-  flex-grow: 1; /* Allows textarea to take available height */
+  flex-grow: 1;
+  /* Allows textarea to take available height */
   min-height: 150px;
   background-color: transparent;
   border: none;
@@ -216,7 +230,8 @@
   font-size: 1.1rem;
   padding: 5px 0;
   resize: vertical;
-  font-family: Arial, 'Noto Sans Sinhala', sans-serif; /* Add Sinhala font */
+  font-family: Arial, 'Noto Sans Sinhala', sans-serif;
+  /* Add Sinhala font */
 }
 
 .converter-textarea::placeholder {
@@ -301,7 +316,8 @@
 }
 
 .action-btn.primary:hover {
-  background-color: #ff8c00; /* Slightly darker orange */
+  background-color: #ff8c00;
+  /* Slightly darker orange */
 }
 
 /* Dropdown specific styles */
@@ -350,14 +366,16 @@
 /* Output Actions */
 .output-actions {
   display: flex;
-  justify-content: flex-end; /* Align to right */
+  justify-content: flex-end;
+  /* Align to right */
   align-items: center;
   gap: 15px;
   flex-wrap: wrap;
   margin-top: 20px;
 }
 
-.converter-btn { /* Reusing the style for action buttons with icon */
+.converter-btn {
+  /* Reusing the style for action buttons with icon */
   background-color: var(--muted);
   color: var(--text);
   border: none;
@@ -400,7 +418,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #28a745; /* Green for enabled status */
+  color: #28a745;
+  /* Green for enabled status */
   font-size: 0.9rem;
 }
 
@@ -464,17 +483,23 @@
   .converter-main-title {
     font-size: 2.5rem;
   }
+
   .textarea-section {
-    grid-template-columns: 1fr; /* Stack text areas on smaller screens */
+    grid-template-columns: 1fr;
+    /* Stack text areas on smaller screens */
   }
+
   .action-bar {
     flex-direction: column;
     align-items: flex-start;
   }
-  .main-actions, .output-actions {
+
+  .main-actions,
+  .output-actions {
     justify-content: flex-start;
     width: 100%;
   }
+
   .output-actions {
     justify-content: flex-start;
   }
@@ -484,13 +509,16 @@
   .converter-main-title {
     font-size: 2rem;
   }
+
   .converter-panel {
     padding: 20px;
   }
+
   .converter-options {
     flex-direction: column;
     align-items: flex-start;
   }
+
   .radio-group {
     flex-wrap: wrap;
   }
@@ -500,17 +528,23 @@
   .converter-main-title {
     font-size: 1.5rem;
   }
+
   .tab-btn {
     padding: 10px 15px;
     font-size: 0.85rem;
   }
-  .action-btn, .converter-btn {
+
+  .action-btn,
+  .converter-btn {
     font-size: 0.8rem;
     padding: 8px 12px;
   }
-  .voice-recognition, .instant-conversion-status {
+
+  .voice-recognition,
+  .instant-conversion-status {
     font-size: 0.8rem;
   }
+
   .example-tag {
     font-size: 0.8rem;
     padding: 6px 10px;
@@ -529,13 +563,14 @@
 .upload-toast-card {
   min-width: 260px;
   max-width: 360px;
-  background: #0f1724; /* dark card */
+  background: #0f1724;
+  /* dark card */
   color: #e6eef8;
   border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
   padding: 10px;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.04);
+  border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 .upload-toast-header {
@@ -546,7 +581,9 @@
   margin-bottom: 8px;
 }
 
-.upload-toast-header strong { font-size: 0.95rem; }
+.upload-toast-header strong {
+  font-size: 0.95rem;
+}
 
 #uploadToastClose {
   background: transparent;
@@ -558,12 +595,15 @@
   padding: 2px 6px;
   border-radius: 6px;
 }
-#uploadToastClose:hover { background: rgba(255,255,255,0.03); }
+
+#uploadToastClose:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
 
 .progress-outer {
   width: 100%;
   height: 10px;
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -586,7 +626,8 @@
 /* Button walata (tabs) */
 .map-tab-btn {
   /* Me button wala size podi karanna, padding adu karanna */
-  padding: 4px 6px; /* Kalin ekata wada podi karala */
+  padding: 4px 6px;
+  /* Kalin ekata wada podi karala */
   font-size: 0.8rem;
 }
 
@@ -595,7 +636,8 @@
   display: grid;
   /* Mehi 90px dakwa adu karala box size eka podi karanna puluwan */
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  gap: 6px; /* Gap eka thawa podi karamu */
+  gap: 6px;
+  /* Gap eka thawa podi karamu */
 }
 
 /* Aluth Character box eka */
@@ -605,46 +647,53 @@
   border: 1px solid var(--muted);
   border-radius: var(--border-radius-sm);
   /* Meke padding adu karala box eka podi karanna puluwan */
-  padding: 4px 6px; /* Thawa podi karala */
+  padding: 4px 6px;
+  /* Thawa podi karala */
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px; /* Meke gap eka adu karanna */
+  gap: 2px;
+  /* Meke gap eka adu karanna */
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 /* Sinhala akuru walata */
 .character-btn .sinhala-char {
-  font-size: 1rem; /* Akuru thawa podi karanna */
+  font-size: 1rem;
+  /* Akuru thawa podi karanna */
   font-weight: bold;
 }
 
 /* Singlish akuru walata */
 .character-btn .singlish-char {
-  font-size: 0.7rem; /* Akuru thawa podi karanna */
+  font-size: 0.7rem;
+  /* Akuru thawa podi karanna */
   color: var(--sub);
 }
 
 /* Tabs ha Character Map box eka athara thiyena ida adu karanna */
 .converter-tabs {
-  margin-bottom: 0px; /* Mekata value eka adu karala balanna. Kalin thibbe 30px */
+  margin-bottom: 0px;
+  /* Mekata value eka adu karala balanna. Kalin thibbe 30px */
 }
 
 .converter-panel#character-map-tab {
-    padding-top: 4px; /* Box eke uda thiyena padding eka podi karanna */
+  padding-top: 4px;
+  /* Box eke uda thiyena padding eka podi karanna */
 }
 
 /* Thawa podi karanna one nam, meka 0 karanna */
 .converter-tabs {
   margin-bottom: 0;
-} 
+}
 
 /* Styling for the Help Panel */
 .help-content {
   display: flex;
   flex-direction: column;
-  gap: 25px; /* Spacing between sections */
+  gap: 25px;
+  /* Spacing between sections */
 }
 
 .help-section h3 {
@@ -687,7 +736,8 @@
 
 /* Modal Background - මුළු screen එකම cover කරයි */
 .voice-modal {
-  display: none; /* Default එකෙන් hide කර ඇත */
+  display: none;
+  /* Default එකෙන් hide කර ඇත */
   position: fixed;
   z-index: 1000;
   left: 0;
@@ -695,15 +745,17 @@
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.8); /* Dark background */
+  background-color: rgba(0, 0, 0, 0.8);
+  /* Dark background */
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
 }
 
 /* Modal Content Box - Pop-up එක */
 .voice-modal-content {
-  background-color: var(--panel); 
-  margin: 15% auto; /* මැදට එන ලෙස සකසා ඇත */
+  background-color: var(--panel);
+  margin: 15% auto;
+  /* මැදට එන ලෙස සකසා ඇත */
   padding: 30px;
   border: 1px solid var(--muted);
   width: 80%;
@@ -714,54 +766,58 @@
 }
 
 .voice-modal-header h2 {
-    color: var(--accent); /* Listening title එකට accent color එක යොදා ඇත */
-    font-size: 1.8rem;
-    margin-bottom: 10px;
+  color: var(--accent);
+  /* Listening title එකට accent color එක යොදා ඇත */
+  font-size: 1.8rem;
+  margin-bottom: 10px;
 }
 
 /* --- Microphone Icon & Wave Animation Styles --- */
 
 .microphone-animation {
-    position: relative; 
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 4rem;
-    color: var(--accent);
-    margin: 20px 0;
-    width: 4rem; /* Icon එකේ ප්‍රමාණය */
-    height: 4rem;
-    border-radius: 50%;
-    z-index: 1; 
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4rem;
+  color: var(--accent);
+  margin: 20px 0;
+  width: 4rem;
+  /* Icon එකේ ප්‍රමාණය */
+  height: 4rem;
+  border-radius: 50%;
+  z-index: 1;
 }
 
 .microphone-animation i {
-    position: relative;
-    z-index: 2; /* මේක තමයි icon එක ඉදිරියට ගන්නේ */
+  position: relative;
+  z-index: 2;
+  /* මේක තමයි icon එක ඉදිරියට ගන්නේ */
 
 }
 
 /* Wave Effect එක Pseudo-elements වලින් නිර්මාණය කරයි */
 .microphone-animation::before,
 .microphone-animation::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border: 3px solid var(--accent); /* Wave line eke thickness eka */
-    border-radius: 50%;
-    opacity: 0;
-    z-index: -1;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 3px solid var(--accent);
+  /* Wave line eke thickness eka */
+  border-radius: 50%;
+  opacity: 0;
+  z-index: -1;
 }
 
 .microphone-animation::before {
-    /* පළමු wave එක */
-    animation: micWave 2s infinite linear;
+  /* පළමු wave එක */
+  animation: micWave 2s infinite linear;
 }
 
 .microphone-animation::after {
-    /* දෙවන wave එක - 1 second ප්‍රමාදයකින් පටන් ගනී */
-    animation: micWave 2s infinite linear 1s; 
+  /* දෙවන wave එක - 1 second ප්‍රමාදයකින් පටන් ගනී */
+  animation: micWave 2s infinite linear 1s;
 }
 
 /* Wave animation definition */
@@ -770,23 +826,26 @@
     transform: scale(1);
     opacity: 0.8;
   }
+
   100% {
-    transform: scale(2.5); /* 2.5 times විශාල වී */
-    opacity: 0; /* ක්‍රමයෙන් මැකී යයි */
+    transform: scale(2.5);
+    /* 2.5 times විශාල වී */
+    opacity: 0;
+    /* ක්‍රමයෙන් මැකී යයි */
   }
 }
 
 /* හඳුනාගත් text එක පෙන්වන box එක */
 .recognized-text-display {
-    min-height: 50px;
-    background-color: var(--secondary-bg);
-    border: 1px solid var(--muted);
-    padding: 10px;
-    border-radius: var(--border-radius-sm);
-    color: var(--text);
-    text-align: left;
-    white-space: pre-wrap;
-    font-size: 1.1rem;
+  min-height: 50px;
+  background-color: var(--secondary-bg);
+  border: 1px solid var(--muted);
+  padding: 10px;
+  border-radius: var(--border-radius-sm);
+  color: var(--text);
+  text-align: left;
+  white-space: pre-wrap;
+  font-size: 1.1rem;
 }
 
 /* Footer Buttons */
@@ -822,7 +881,8 @@
 }
 
 .ok-btn:hover:not(:disabled) {
-  background-color: #cc5500; /* Hover color */
+  background-color: #cc5500;
+  /* Hover color */
 }
 
 /*
@@ -838,24 +898,27 @@
 
 /* --- General Adjustments for Mobile (Max-width 768px) --- */
 @media (max-width: 768px) {
-  
+
   /* Main Content Area */
   .converter-page-content {
-    padding: 20px 10px; /* Reduce padding on smaller screens */
+    padding: 20px 10px;
+    /* Reduce padding on smaller screens */
     gap: 20px;
   }
-  
+
   /* Header Title */
   .converter-main-title {
-    font-size: 2rem; /* Reduce large title size */
+    font-size: 2rem;
+    /* Reduce large title size */
   }
-  
+
   .converter-subtitle {
     font-size: 0.9rem;
   }
 
   .converter-panel {
-    padding: 20px 15px; /* Reduce panel padding */
+    padding: 20px 15px;
+    /* Reduce panel padding */
   }
 
   /* Tabs Section - Tabs to wrap neatly */
@@ -864,34 +927,40 @@
     gap: 5px;
     margin-bottom: 15px;
   }
+
   .tab-btn {
     padding: 10px 15px;
     font-size: 0.85rem;
-    flex-grow: 1; /* Allow tabs to grow and fill the space */
+    flex-grow: 1;
+    /* Allow tabs to grow and fill the space */
     text-align: center;
     justify-content: center;
-    margin-top: 5px; /* Add slight separation when wrapping */
+    margin-top: 5px;
+    /* Add slight separation when wrapping */
   }
-  
+
   /* Options Section - Stack the Input Type and Output Format selections */
   .converter-options {
     flex-direction: column;
     gap: 20px;
   }
-  
+
   .radio-group {
-    flex-wrap: wrap; /* Ensure radio buttons wrap if necessary */
+    flex-wrap: wrap;
+    /* Ensure radio buttons wrap if necessary */
     gap: 15px;
   }
 
   /* Textarea Section - STACKING THE INPUT AND OUTPUT AREAS */
   .textarea-section {
-    grid-template-columns: 1fr; /* Change from 1fr 1fr to 1fr (stacking) */
+    grid-template-columns: 1fr;
+    /* Change from 1fr 1fr to 1fr (stacking) */
     gap: 15px;
   }
-  
+
   .converter-textarea {
-    min-height: 120px; /* Make text areas slightly shorter on mobile */
+    min-height: 120px;
+    /* Make text areas slightly shorter on mobile */
     font-size: 1rem;
   }
 
@@ -901,76 +970,86 @@
     align-items: stretch;
     gap: 15px;
   }
-  
+
   /* Voice status goes to the top for visibility */
   .voice-recognition {
     justify-content: center;
-    order: -1; 
+    order: -1;
     padding-bottom: 10px;
     border-bottom: 1px solid var(--muted);
   }
 
-  .main-actions, .output-actions {
+  .main-actions,
+  .output-actions {
     width: 100%;
     /* Flex-wrap for action buttons to flow nicely */
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
     justify-content: space-between;
     gap: 8px;
   }
 
-  .action-btn, 
-  .converter-btn, 
+  .action-btn,
+  .converter-btn,
   .dropdown-action button {
-    flex-grow: 1; /* Buttons take equal space in a row */
-    min-width: 45%; /* Ensure no more than two buttons per line in most cases */
+    flex-grow: 1;
+    /* Buttons take equal space in a row */
+    min-width: 45%;
+    /* Ensure no more than two buttons per line in most cases */
     text-align: center;
     justify-content: center;
     font-size: 0.9rem;
     padding: 10px 12px;
   }
-  
+
   /* Dropdowns */
   .dropdown-action {
     flex-grow: 1;
     min-width: 45%;
   }
+
   .dropdown-menu-small {
-    min-width: 100%; /* Dropdown menu fits button width */
+    min-width: 100%;
+    /* Dropdown menu fits button width */
   }
 
   /* Share button and Status */
   #shareBtn {
     flex-grow: 1;
-    min-width: 100%; /* Share button gets its own line */
+    min-width: 100%;
+    /* Share button gets its own line */
     order: 10;
   }
+
   .instant-conversion-status {
     width: 100%;
     text-align: center;
     order: 5;
     font-size: 0.85rem;
   }
-  
+
   /* Examples */
   .examples-section .example-tags {
     flex-wrap: wrap;
     justify-content: center;
     gap: 8px;
   }
+
   .example-tag {
     font-size: 0.8rem;
     padding: 8px 12px;
   }
-  
+
   /* Character Map Grid */
   .character-grid-container {
     /* Auto-fill the grid with buttons that are at least 80px wide */
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); 
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
     gap: 8px;
   }
+
   .sinhala-char {
     font-size: 1.4rem;
   }
+
   .singlish-char {
     font-size: 0.75rem;
   }
@@ -979,22 +1058,399 @@
 
 /* --- Extra Small Mobile Devices (Max-width 480px) --- */
 @media (max-width: 480px) {
-  
+
   /* Further reduce title size */
   .converter-main-title {
     font-size: 1.6rem;
   }
 
   /* Ensure Action buttons don't get too small */
-  .action-btn, 
-  .converter-btn, 
+  .action-btn,
+  .converter-btn,
   .dropdown-action button {
-    min-width: 100%; /* Force buttons to take full width and stack */
+    min-width: 100%;
+    /* Force buttons to take full width and stack */
   }
-  
+
   /* Character Map Grid (Even more compact) */
   .character-grid-container {
     grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
   }
-  
+
+}
+
+/* sinhala-converter.css - Appending new styles for the download panel */
+
+/* --- Extension Download Panel Styles --- */
+.download-extension-panel {
+  align-items: center;
+  text-align: center;
+  padding: 40px 30px;
+  margin-top: 30px;
+  /* Space from the content above */
+}
+
+.download-title {
+  /* Re-using and adjusting the main title style for consistency */
+  font-family: var(--font-family-main);
+  font-weight: 800;
+  color: var(--text);
+  font-size: 2rem;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.download-title i {
+  margin-right: 10px;
+  color: var(--accent);
+  /* Orange icon color */
+}
+
+.download-description {
+  color: var(--sub);
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 15px auto 25px auto;
+}
+
+.download-description strong {
+  color: var(--text);
+}
+
+.extension-action-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Download button sizing */
+.large-btn {
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  min-width: 250px;
+  justify-content: center;
+}
+
+.version-text {
+  color: var(--sub);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 600px) {
+  .download-title {
+    font-size: 1.5rem;
+  }
+}
+
+/* download-modal.css */
+
+/* Modal Container (සම්පූර්ණ Screen එක Overlay කිරීම) */
+.modal {
+  display: none;
+  /* මුලින් සඟවා තබයි */
+  position: fixed;
+  z-index: 9000;
+  /* අනෙකුත් සියල්ලටම වඩා උඩින් පෙන්වීමට */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.85);
+  /* කළු විනිවිද පෙනෙන පසුබිම */
+}
+
+/* Modal Content Box (මැදට එන කොටස) */
+.modal-content {
+  background-color: #2a2a2a;
+  /* පසුබිම් වර්ණය */
+  padding: 30px;
+  border: 2px solid #ff6a00;
+  /* Orange Accent Border */
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* Modal එක මැදට ගෙන ඒම */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  text-align: center;
+  animation: fadeIn 0.3s ease-out;
+  /* සරල Animation එකක් */
+}
+
+/* Close Button (X ලකුණ) */
+.close-btn {
+  color: #fff;
+  font-size: 32px;
+  font-weight: bold;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  transition: color 0.2s;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: #ff6a00;
+  /* Hover color */
+}
+
+/* Input Field Style */
+.modal-content input[type="password"] {
+  padding: 12px;
+  width: 90%;
+  margin-bottom: 15px;
+  border: 1px solid #444;
+  background-color: #1a1a1a;
+  /* Input පසුබිම */
+  color: #fff;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+/* Download Button in Modal */
+.modal-content button {
+  background-color: #ff6a00;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.modal-content button:hover {
+  background-color: #e55c00;
+  /* ඩිම් වුණු Orange */
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* === Modal Styles === */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(3px);
+}
+
+.modal[aria-hidden="false"] {
+  display: block;
+}
+
+.modal-content {
+  background: #1f1f1f;
+  border: 2px solid var(--accent);
+  border-radius: 12px;
+  padding: 20px;
+  width: 90%;
+  max-width: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 24px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #fff;
+}
+
+.modal-content input[type="password"] {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  background: #0f0f10;
+  border: 1px solid #333;
+  border-radius: 6px;
+  color: #fff;
+}
+
+.modal-content button {
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.action-btn {
+  background: #333;
+  color: #fff;
+}
+
+.action-btn.primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* === Custom Download Modal Styles (sinhala-converter.css) === */
+
+/* Password Input Field එක සඳහා style */
+.password-input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  border: 1px solid var(--muted);
+  /* අඳුරු Border එකක් */
+  border-radius: var(--border-radius-sm);
+  background-color: var(--secondary-bg);
+  /* අඳුරු පසුබිම */
+  color: var(--text);
+  /* සුදු text */
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.password-input:focus {
+  border-color: var(--accent);
+  /* Focus වන විට Orange/Red Accent එකක් */
+  outline: none;
+}
+
+/* Modal Actions (Buttons) සඳහා Container එක */
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Modal Buttons සඳහා Style Override */
+.modal-actions .converter-btn {
+  flex-grow: 1;
+  padding: 10px 15px;
+  font-size: 1rem;
+}
+
+/* Close Button එක සඳහා (Secondary) */
+.modal-actions .converter-btn.secondary {
+  background-color: var(--panel);
+  /* අඳුරු වර්ණයක් */
+  color: var(--sub);
+  /* අඳුරු Text එකක් */
+}
+
+.modal-actions .converter-btn.secondary:hover {
+  background-color: var(--muted);
+}
+
+/* Download Modal එකේ Title එක */
+.download-modal-content .modal-title {
+  color: var(--accent);
+  /* Orange/Red Accent */
+  margin-bottom: 5px;
+}
+
+/* Box Icon (Close Button) සඳහා Style */
+.modal-actions .converter-btn.secondary i {
+  margin-right: 5px;
+}
+
+/* === Download Extension Panel - Mobile Responsiveness === */
+
+/* සාමාන්‍යයෙන් විශාල තිර සඳහා (Desktop/Tablet) */
+.extension-action-center {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* 768px ට වඩා කුඩා තිර සඳහා (Mobile Phones) */
+@media (max-width: 768px) {
+
+  /* Action Center එකේ බොත්තම් සහ text සිරස්ව (vertical) පෙන්වයි */
+  .extension-action-center {
+    flex-direction: column;
+    align-items: flex-start;
+    /* වමට align කරයි */
+    gap: 10px;
+  }
+
+  /* Download Now බොත්තම මුළු පළලම (full width) පුරවයි */
+  .extension-action-center .converter-btn.large-btn {
+    width: 100%;
+    text-align: center;
+    /* mobile වලදී බොත්තම උසින් වැඩි කිරීම */
+    padding: 15px 10px;
+  }
+
+  /* Version text එක බොත්තම යටින්, වමට පෙන්වයි */
+  .extension-action-center .version-text {
+    font-size: 0.85rem;
+    text-align: left;
+    width: 100%;
+  }
+
+  /* Panel එකේ Padding එක ටිකක් අඩු කිරීම */
+  .download-extension-panel {
+    padding: 20px;
+  }
+}
+
+/* === Modal Content (Popup Box) Positioning Fix === */
+
+/* සාමාන්‍ය Modal Content Styles */
+.modal-content {
+  /* ... අනෙක් styles නොවෙනස්ව තබා ගන්න ... */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* තිරයේ වමේ 50% */
+  transform: translate(-50%, -50%);
+  /* නිවැරදිව මැදට ගැනීම */
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Modal Buttons (Verify & Close) Mobile Fix */
+@media (max-width: 500px) {
+
+  /* Modal එක කුඩා තිරයේදී තිරයේ වැඩි ප්‍රමාණයක් පුරවයි */
+  .modal-content {
+    width: 90%;
+    margin: 20px;
+  }
+
+  /* බොත්තම් දෙක කුඩා තිරයේදී එක යට එක (stacked) පෙන්වයි */
+  .modal-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* බොත්තම් දෙකම full width පෙන්වයි */
+  .modal-actions .converter-btn {
+    width: 100%;
+    margin: 0;
+  }
 }
