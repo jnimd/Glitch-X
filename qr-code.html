@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="si">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GLITCH X — QR Generator</title>
+    <link rel="icon" type="image/png" href="images/headlogo.png">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* This page specific CSS is kept simple, inheriting most styles from style.css */
+        /*
+         * QR-Page class එක සම්පූර්ණයෙන්ම ඉවත් කර ඇත.
+         * දැන් අන්තර්ගතය කෙලින්ම frame එක තුළට යයි.
+         */
+        .content {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .logo-container img {
+            width: 80px;
+        }
+
+        h1 {
+            font-family: "Press Start 2P", sans-serif;
+            font-size: 1.5rem;
+            text-align: center;
+            color: var(--text);
+            margin: 0;
+        }
+
+        p {
+            color: var(--sub);
+            text-align: center;
+            margin-top: 8px;
+            margin-bottom: 30px;
+        }
+
+        .tabs {
+            display: flex;
+            width: 100%;
+            border-bottom: 2px solid var(--muted);
+            margin-bottom: 24px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            background: transparent;
+            color: var(--sub);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: color 0.2s;
+            border-bottom: 2px solid transparent;
+            position: relative;
+            top: 2px;
+        }
+
+        .tab-btn.active {
+            color: var(--accent);
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .tab-content {
+            width: 100%;
+            padding: 0;
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-section {
+            width: 100%;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .input-group input[type="text"] {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--pill);
+            border: 1px solid var(--sub);
+            border-radius: 12px;
+            color: var(--text);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .input-group input[type="text"]:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 1px var(--accent);
+        }
+
+        .clear-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--muted);
+            color: var(--sub);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+
+        .clear-btn:hover {
+            background: #1a1e23;
+        }
+
+        .generated-qr-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .qr-placeholder {
+            width: 250px;
+            height: 250px;
+            background: var(--muted);
+            border: 1px dashed var(--sub);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--sub);
+            text-align: center;
+        }
+
+        .qr-placeholder img {
+            width: 60px;
+            height: 60px;
+            opacity: 0.5;
+            margin-bottom: 10px;
+        }
+
+        .qr-placeholder .qr-text {
+            font-size: 0.9rem;
+        }
+
+        .qr-image {
+            display: none;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .action-btn {
+            padding: 12px 24px;
+            border: 2px solid var(--accent);
+            border-radius: 999px;
+            background-color: transparent;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .action-btn:hover {
+            background-color: var(--accent);
+            color: var(--panel);
+        }
+
+        /* Styles for the new "Data" box */
+        .data-display-container {
+            width: 100%;
+            margin-top: 20px;
+            background-color: var(--panel);
+            border: 1px solid var(--muted);
+            border-radius: 12px;
+            padding: 15px;
+            display: none;
+            /* Changed to none */
+        }
+
+        .data-display-container h3 {
+            margin: 0 0 10px 0;
+            color: var(--text);
+            font-size: 1.1rem;
+        }
+
+        .data-display-box {
+            background-color: var(--pill);
+            border: 1px solid var(--sub);
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 0.9rem;
+            color: var(--text);
+            word-wrap: break-word;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 16px;
+            }
+
+            h1 {
+                font-size: 1.2rem;
+            }
+
+            .qr-placeholder {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="frame">
+        <header class="header">
+            <div class="brand">
+                <a href="index.html" class="logo">GLITCH</a>
+            </div>
+        </header>
+
+        <section class="content">
+            <div class="logo-container">
+                <img src="images/qr1.png" alt="QR Code Generator Logo">
+            </div>
+            <h1>QR Code Generator</h1>
+            <p>Generate QR codes for URLs, text, and contact information</p>
+
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="url">URL</button>
+                <button class="tab-btn" data-tab="text">Text</button>
+                <button class="tab-btn" data-tab="contact">Contact</button>
+            </div>
+
+            <div id="url-tab" class="tab-content active form-section">
+                <div class="input-group">
+                    <label for="url-input">Website URL</label>
+                    <input id="url-input" type="text" placeholder="example.com or https://example.com" />
+                    <small style="color:var(--sub); font-size:0.85rem; display:block; margin-top:8px;">Enter a website
+                        URL. If you don't include http://, we'll add https:// automatically.</small>
+                </div>
+                <button class="clear-btn" onclick="clearUrlInput()">Clear All Fields</button>
+            </div>
+
+            <div id="text-tab" class="tab-content form-section">
+                <div class="input-group">
+                    <label for="text-input">Enter Text</label>
+                    <input id="text-input" type="text" placeholder="Enter your text here" />
+                </div>
+                <button class="clear-btn" onclick="clearTextInput()">Clear All Fields</button>
+            </div>
+
+            <div id="contact-tab" class="tab-content form-section">
+                <div class="input-group">
+                    <label for="contact-name">Full Name</label>
+                    <input id="contact-name" type="text" placeholder="John Doe" />
+                </div>
+                <div class="input-group">
+                    <label for="contact-phone">Phone Number</label>
+                    <input id="contact-phone" type="text" placeholder="+1234567890" />
+                </div>
+                <div class="input-group">
+                    <label for="contact-email">Email Address</label>
+                    <input id="contact-email" type="text" placeholder="john.doe@example.com" />
+                </div>
+                <button class="clear-btn" onclick="clearContactInput()">Clear All Fields</button>
+            </div>
+
+            <div class="generated-qr-section">
+                <h2>Generated QR Code</h2>
+                <div class="qr-placeholder" id="qr-placeholder">
+                    <img src="images/qr2.png" alt="QR Code icon">
+                    <span class="qr-text">Fill in the form to generate your QR code</span>
+                </div>
+                <img id="qr-image" class="qr-image" src="" alt="Generated QR Code">
+
+                <div class="action-buttons">
+                    <button id="download-btn" class="action-btn" style="display: none;">Download QR Code</button>
+                    <button id="copy-btn" class="action-btn" style="display: none;">Copy Data</button>
+                </div>
+            </div>
+
+            <div id="data-display-container" class="data-display-container">
+                <h3>QR Code Data</h3>
+                <div id="data-display" class="data-display-box">
+                    No data entered yet.
+                </div>
+            </div>
+
+            <p style="text-align:center; font-size:0.8rem; color:var(--sub); margin-top:20px;">Generate QR codes
+                instantly • No data stored • Free to use</p>
+        </section>
+
+
+        </footer>
+        <footer class="main-footer">
+            <div class="footer-container">
+                <div class="footer-top">
+                    <div class="footer-logo">
+                        <img src="images/glitch logo.png" alt="GLITCH CUBE AI Logo" class="footer-logo-image">
+                    </div>
+                    <div class="footer-links">
+                        <h4>ABOUT</h4>
+                        <ul>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Support</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links">
+                        <h4>INFO</h4>
+                        <ul>
+                            <li><a href="#">Legal Notice</a></li>
+                            <li><a href="#">DMCA</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                            <li><a href="#">Cookie Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links">
+                        <h4>GET THE APP</h4>
+                        <div class="app-links">
+                            <a href="#"><img src="images/playstore.png" alt="Google Play"></a>
+                            <a href="#"><img src="images/appstore.png" alt="App Store"></a>
+                        </div>
+                    </div>
+                </div>
+                <hr class="footer-divider">
+                <div class="footer-bottom">
+                    <div class="social-icons">
+                        <a href="#"><i class='bx bxl-facebook'></i></a>
+                        <a href="#"><i class='bx bxl-tiktok'></i></a>
+                        <a href="#"><i class='bx bxl-instagram'></i></a>
+                        <a href="#"><i class='bx bxl-linkedin'></i></a>
+                    </div>
+                    <p class="copyright">© 2025 Copyright: GLITCH X AI</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        const tabs = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const urlInput = document.getElementById('url-input');
+        const textInput = document.getElementById('text-input');
+        const contactNameInput = document.getElementById('contact-name');
+        const contactPhoneInput = document.getElementById('contact-phone');
+        const contactEmailInput = document.getElementById('contact-email');
+        const qrPlaceholder = document.getElementById('qr-placeholder');
+        const qrImage = document.getElementById('qr-image');
+        const downloadBtn = document.getElementById('download-btn');
+        const copyBtn = document.getElementById('copy-btn');
+        const dataDisplayContainer = document.getElementById('data-display-container'); // Get the container
+        const dataDisplayBox = document.getElementById('data-display');
+
+        function switchTab(tabName) {
+            tabs.forEach(tab => tab.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+            generateQrCode();
+        }
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                switchTab(tab.dataset.tab);
+            });
+        });
+
+        const inputs = document.querySelectorAll('.form-section input');
+        inputs.forEach(input => {
+            input.addEventListener('input', generateQrCode);
+        });
+
+        function clearUrlInput() {
+            urlInput.value = '';
+            qrPlaceholder.style.display = 'flex';
+            qrImage.style.display = 'none';
+            downloadBtn.style.display = 'none';
+            copyBtn.style.display = 'none';
+            dataDisplayContainer.style.display = 'none'; // Hide the container
+            dataDisplayBox.textContent = 'No data entered yet.';
+        }
+
+        function clearTextInput() {
+            textInput.value = '';
+            qrPlaceholder.style.display = 'flex';
+            qrImage.style.display = 'none';
+            downloadBtn.style.display = 'none';
+            copyBtn.style.display = 'none';
+            dataDisplayContainer.style.display = 'none'; // Hide the container
+            dataDisplayBox.textContent = 'No data entered yet.';
+        }
+
+        function clearContactInput() {
+            contactNameInput.value = '';
+            contactPhoneInput.value = '';
+            contactEmailInput.value = '';
+            qrPlaceholder.style.display = 'flex';
+            qrImage.style.display = 'none';
+            downloadBtn.style.display = 'none';
+            copyBtn.style.display = 'none';
+            dataDisplayContainer.style.display = 'none'; // Hide the container
+            dataDisplayBox.textContent = 'No data entered yet.';
+        }
+
+        function buildQRUrl(data) {
+            const encoded = encodeURIComponent(data);
+            return `https://api.qrserver.com/v1/create-qr-code/?data=${encoded}&size=250x250`;
+        }
+
+        async function downloadQrCode() {
+            const response = await fetch(qrImage.src);
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = 'qrcode.png';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+
+        function copyDataToClipboard(data) {
+            navigator.clipboard.writeText(data).then(() => {
+                alert('Data copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        }
+
+        function generateQrCode() {
+            let data = '';
+            const activeTab = document.querySelector('.tab-btn.active').dataset.tab;
+
+            if (activeTab === 'url') {
+                data = urlInput.value.trim();
+                if (data && !data.startsWith('http://') && !data.startsWith('https://')) {
+                    data = 'https://' + data;
+                }
+            } else if (activeTab === 'text') {
+                data = textInput.value.trim();
+            } else if (activeTab === 'contact') {
+                const name = contactNameInput.value.trim();
+                const phone = contactPhoneInput.value.trim();
+                const email = contactEmailInput.value.trim();
+                if (name || phone || email) {
+                    data = `BEGIN:VCARD\nVERSION:3.0\nN:${name}\nTEL:${phone}\nEMAIL:${email}\nEND:VCARD`;
+                }
+            }
+
+            if (data) {
+                qrImage.src = buildQRUrl(data);
+                qrImage.style.display = 'block';
+                qrPlaceholder.style.display = 'none';
+
+                downloadBtn.style.display = 'block';
+                copyBtn.style.display = 'block';
+                dataDisplayContainer.style.display = 'block'; // Show the container
+                dataDisplayBox.textContent = data; // Update the content
+
+                downloadBtn.onclick = downloadQrCode;
+                copyBtn.onclick = () => copyDataToClipboard(data);
+            } else {
+                qrPlaceholder.style.display = 'flex';
+                qrImage.style.display = 'none';
+
+                downloadBtn.style.display = 'none';
+                copyBtn.style.display = 'none';
+                dataDisplayContainer.style.display = 'none'; // Hide the container
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            switchTab('url');
+        });
+    </script>
+</body>
+
+</html>
