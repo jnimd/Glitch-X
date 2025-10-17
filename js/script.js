@@ -1,3 +1,32 @@
+// --- LOADING SCREEN LOGIC ---
+document.addEventListener("DOMContentLoaded", function () {
+  const loadingScreen = document.getElementById('loading-screen');
+  const mainContent = document.getElementById('main-content');
+  const LOADING_DURATION_MS = 3000; // Loading time set to 3 seconds
+
+  // Set a timeout to hide the loading screen and show the main content
+  setTimeout(() => {
+    // 1. Start the fade-out animation for the loading screen (CSS transition)
+    loadingScreen.classList.add('fade-out');
+
+    // 2. After the fade-out transition is complete, hide it completely
+    loadingScreen.addEventListener('transitionend', function handler() {
+      // Hide the loading screen element
+      loadingScreen.style.display = 'none';
+
+      // 3. Show the main content by removing the 'hidden' class
+      mainContent.classList.remove('hidden');
+
+      // Remove the listener to prevent multiple executions
+      loadingScreen.removeEventListener('transitionend', handler);
+    });
+
+  }, LOADING_DURATION_MS);
+});
+
+// (Your existing Swiper and other code should be below this new code)
+
+
 // Swiper instance for the "Projects" section
 var swiperProjects = new Swiper("#projects-swiper", {
   effect: "coverflow",
@@ -93,41 +122,79 @@ var swiperUpdates = new Swiper("#updates-swiper", {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const searchInput = document.getElementById('searchInput');
-    const searchResults = document.getElementById('searchResults');
-    const projectUrl = 'borg.html';
-    const logoUrl = 'images/borgexelogo.png'; // මෙතන ඔයාගේ logo file එකේ path එක දාන්න
+  const searchInput = document.getElementById('searchInput');
+  const searchResults = document.getElementById('searchResults');
+  const projectUrl = 'borg.html';
+  const logoUrl = 'images/borgexelogo.png'; // මෙතන ඔයාගේ logo file එකේ path එක දාන්න
 
-    // Search input එකට අදාල event listener එක
-    searchInput.addEventListener('input', (event) => {
-        const query = event.target.value.toLowerCase();
-        
-        // "G" අකුරෙන් පටන් ගන්නා ඕනෑම text එකක් සඳහා suggestion එක පෙන්වන්න
-        if (query.startsWith('g')) {
-            searchResults.innerHTML = `
+  // Search input එකට අදාල event listener එක
+  searchInput.addEventListener('input', (event) => {
+    const query = event.target.value.toLowerCase();
+
+    // "G" අකුරෙන් පටන් ගන්නා ඕනෑම text එකක් සඳහා suggestion එක පෙන්වන්න
+    if (query.startsWith('g')) {
+      searchResults.innerHTML = `
                 <a href="${projectUrl}" class="search-result-item">
                     <img src="${logoUrl}" alt="Glitch Borg Logo" class="result-logo">
                     <span>GLITCH BORG - PC Optimizer</span>
                 </a>
             `;
-            searchResults.style.display = 'flex';
-        } else {
-            // වෙනත් දෙයක් type කරද්දී suggestion එක සඟවන්න
-            searchResults.style.display = 'none';
-            searchResults.innerHTML = '';
-        }
-    });
+      searchResults.style.display = 'flex';
+    } else {
+      // වෙනත් දෙයක් type කරද්දී suggestion එක සඟවන්න
+      searchResults.style.display = 'none';
+      searchResults.innerHTML = '';
+    }
+  });
 
-    // Enter key එක press කරද්දී අදාල page එකට redirect කරන්න
-    searchInput.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') {
-            const query = searchInput.value.toLowerCase();
-            if (query.startsWith('g')) {
-                window.location.href = projectUrl;
-            }
-        }
-    });
+  // Enter key එක press කරද්දී අදාල page එකට redirect කරන්න
+  searchInput.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+      const query = searchInput.value.toLowerCase();
+      if (query.startsWith('g')) {
+        window.location.href = projectUrl;
+      }
+    }
+  });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.getElementById('searchInput');
+  const searchResults = document.getElementById('searchResults');
+  const projectUrl = 'sinhala-converter.html';
+  const logoUrl = ''; // මෙතන ඔයාගේ logo file එකේ path එක දාන්න
+
+  // Search input එකට අදාල event listener එක
+  searchInput.addEventListener('input', (event) => {
+    const query = event.target.value.toLowerCase();
+
+    // "G" අකුරෙන් පටන් ගන්නා ඕනෑම text එකක් සඳහා suggestion එක පෙන්වන්න
+    if (query.startsWith('s')) {
+      searchResults.innerHTML = `
+                <a href="${projectUrl}" class="search-result-item">
+                    <img src="${logoUrl}" alt="Singlish C Logo" class="result-logo">
+                    <span>Singlish Converter</span>
+                </a>
+            `;
+      searchResults.style.display = 'flex';
+    } else {
+      // වෙනත් දෙයක් type කරද්දී suggestion එක සඟවන්න
+      searchResults.style.display = 'none';
+      searchResults.innerHTML = '';
+    }
+  });
+
+  // Enter key එක press කරද්දී අදාල page එකට redirect කරන්න
+  searchInput.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+      const query = searchInput.value.toLowerCase();
+      if (query.startsWith('g')) {
+        window.location.href = projectUrl;
+      }
+    }
+  });
+});
+
 
 // Get the menu button and menu container
 const menuBtn = document.querySelector('.menu-btn');
@@ -137,7 +204,7 @@ const menuContainer = document.querySelector('.menu-container');
 document.addEventListener('click', (event) => {
   // Check if the clicked element is the menu button itself or a descendant of it
   const isMenuBtnClicked = menuBtn.contains(event.target);
-  
+
   // Check if the clicked element is inside the menu container
   const isInsideMenu = menuContainer.contains(event.target);
 
@@ -145,7 +212,7 @@ document.addEventListener('click', (event) => {
   if (isMenuBtnClicked) {
     menuBtn.classList.toggle('active');
     menuContainer.classList.toggle('active');
-  } 
+  }
   // If the menu is open and the click was outside the menu (and not on the button), close it
   else if (menuContainer.classList.contains('active') && !isInsideMenu) {
     menuBtn.classList.remove('active');
@@ -161,3 +228,4 @@ menuItems.forEach(item => {
     menuContainer.classList.remove('active');
   });
 });
+
