@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glitch Cube</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+
+        <aside class="sidebar">
+
+            <div class="sidebar-header">
+                <div class="logo-area">
+                    <img src="bat2.png" alt="BuildHub Logo" class="logo-image">
+                    <span class="logo-text">Cube AI</span>
+                </div>
+                <button class="menu-toggle-btn">
+                    <span class="icon">◻️</span>
+                </button>
+            </div>
+
+            <button class="new-chat-btn" id="new-chat-button" disabled>
+                <span class="icon">✏️</span> New chat
+            </button>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-link search-link">
+                    <span class="icon">🔍</span> Search chats
+                </a>
+
+                <div class="chat-group" id="chats-list-container">
+                    <div class="group-title">CHATS</div>
+                    <a class="nav-link" style="padding:10px 15px; color:var(--sub); cursor:default;">Sign in to view
+                        history.</a>
+                </div>
+
+                <div class="chat-group">
+                    <div class="group-title">Cubies</div>
+                    <a href="#" class="nav-link">
+                        <span class="icon">🖼️</span> Explore
+                    </a>
+                    <a href="#" class="nav-link">
+                        <span class="icon" style="color: #00bcd4;">✨</span> Canva
+                    </a>
+                </div>
+
+                <a href="#" class="nav-link">
+                    <span class="icon">📚</span> Library
+                </a>
+                <a href="#" class="nav-link">
+                    <span class="icon">📁</span> Projects
+                </a>
+
+            </nav>
+
+            <div class="user-profile-bottom" id="user-auth-section">
+
+                <button class="auth-btn google-login-btn" id="google-login-button">
+                    Sign in with Google
+                </button>
+
+                <div class="profile-info-signed-in hidden" id="user-details-display">
+                    <div class="profile-info">
+                        <span class="initials-avatar" id="user-initials">?</span>
+                        <div class="details">
+                            <div class="name" id="user-display-name">Guest</div>
+                            <div class="plan">PRO Member</div>
+                        </div>
+                    </div>
+                    <button class="logout-btn" id="logout-button" title="Log out">
+                        🚪
+                    </button>
+                </div>
+            </div>
+        </aside>
+        <main class="main-content">
+            <header class="main-header">
+                <div class="user-profile">
+                    <p>Hello Cube</p>
+                    <img src="cube.gif" alt="User Avatar" class="avatar">
+                </div>
+            </header>
+
+            <section class="welcome-section">
+                <div class="orange-orb"></div>
+                <h1 class="retro-text">Welcome To CUBE AI</h1>
+                <p class="sub-text">Please Sign in with Google to start chatting.</p>
+            </section>
+
+            <section class="prompt-suggestions">
+
+                <div class="chat-display" id="main-chat-display">
+                </div>
+
+                <div class="prompt-card chat-input-card">
+                    <textarea id="user-input" placeholder="Sign in to start chatting..." class="chat-input-field"
+                        rows="1" disabled></textarea>
+
+                    <button class="action-btn" disabled>
+                        <span class="icon">🤖</span> CUBE Beta
+                    </button>
+                    <button class="send-message-btn" id="send-button" disabled>↗</button>
+                </div>
+
+
+            </section>
+        </main>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

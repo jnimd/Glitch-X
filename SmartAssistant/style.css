@@ -1,0 +1,637 @@
+/* --- Main Website Theme Variables (from user's uploaded CSS) --- */
+:root {
+    --bg: #0d0f13;
+    --panel: #0f1217;
+    --muted: #161a21;
+    /* Used for hover states and subtle backgrounds */
+    --text: #eef2f7;
+    --sub: #a7b0c0;
+    --pill: #0f1115;
+    --accent: #ff6a00;
+    /* Main Orange Accent - Used for highlights/active */
+    --accent-light: #ff9900;
+    /* Lighter Orange for glow/hover */
+    --radius: 24px;
+    --shadow: 0 20px 60px rgba(0, 0, 0, 0.55), 0 4px 10px rgba(0, 0, 0, 0.35);
+    --border-color: #1f2533;
+
+    /* OpenAI Image specific colors/sizes */
+    --sidebar-bg-darker: #0d0d0d;
+    --upgrade-btn-bg: #222;
+    --upgrade-btn-text: #a7b0c0;
+}
+
+/* --- Global Styles --- */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    /* === GameBanana style pixel retro bg === */
+    background-color: #0d1117;
+    /* dark navy base */
+    background-image:
+        linear-gradient(0deg, transparent 24%, rgba(233, 145, 73, 0.952) 25%, rgba(233, 145, 73, 0.952) 26%, transparent 27%, transparent 74%, rgba(233, 145, 73, 0.952) 75%, rgba(233, 145, 73, 0.952) 76%, transparent 77%, transparent),
+        linear-gradient(90deg, transparent 24%, rgba(233, 145, 73, 0.952) 25%, rgba(233, 145, 73, 0.952) 26%, transparent 27%, transparent 74%, rgba(233, 145, 73, 0.952) 75%, rgba(233, 145, 73, 0.952) 76%, transparent 77%, transparent);
+    background-size: 13px 13px;
+    /* denser smaller pixel grid size */
+    background-attachment: fixed;
+
+    color: var(--text);
+    font: 500 1rem/1.5 "Inter", system-ui, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+/* Retro Font for Titles/Highlights */
+.retro-text {
+    font-family: 'Press Start 2P', cursive;
+    letter-spacing: 2px;
+    font-size: 1.8em;
+    color: var(--accent);
+    text-shadow: 0 0 10px rgba(255, 106, 0, 0.5);
+}
+
+.sub-text {
+    color: var(--sub);
+}
+
+
+.app-container {
+    display: grid;
+    /* Sidebar width increased to fit text/history list */
+    grid-template-columns: 260px 1fr;
+    width: 95vw;
+    height: 90vh;
+    background-color: var(--bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    margin: 40px;
+    background-color: var(--panel);
+    border-radius: var(--radius);
+    overflow: hidden;
+
+    /* 🚨 NEON BASE GLOW (Base state) */
+    border: 2px solid var(--accent-light);
+
+}
+
+/* 💡 Pro-Tip: Hover effect එකක් දමමු! */
+
+
+/* ----------------------------------------------------- */
+/* --- NEW SIDEBAR STYLING (OpenAI/Dark Mode History) --- */
+/* ----------------------------------------------------- */
+
+.sidebar {
+    /* Use a slightly darker color for the sidebar background */
+    background-color: var(--sidebar-bg-darker);
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-right: 1px solid var(--border-color);
+    overflow-y: auto;
+
+    /* Hide the scrollbar, common in this UI style */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.sidebar::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari and Opera */
+}
+
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    font-size: 1.5em;
+    color: var(--accent);
+}
+
+.logo-text {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.menu-toggle-btn {
+    background: none;
+    border: none;
+    color: var(--sub);
+    font-size: 1.5em;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.menu-toggle-btn:hover {
+    background-color: var(--muted);
+}
+
+/* New Chat Button */
+.new-chat-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--muted);
+    color: var(--text);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 12px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    font-weight: 500;
+}
+
+.new-chat-btn:hover {
+    background-color: #2a2f3a;
+}
+
+.new-chat-btn .icon {
+    font-size: 1.2em;
+    color: var(--text);
+}
+
+
+/* Sidebar Nav for Links and History */
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-bottom: 10px;
+}
+
+.sidebar-nav .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text);
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 0.95em;
+    transition: background-color 0.2s;
+}
+
+.sidebar-nav .nav-link:hover {
+    background-color: var(--muted);
+}
+
+.sidebar-nav .icon {
+    font-size: 1.2em;
+    color: var(--sub);
+}
+
+.search-link {
+    /* Style the Search chats link to stand out a bit like in the image */
+    background-color: var(--muted);
+    color: var(--sub);
+}
+
+.search-link:hover {
+    background-color: #2a2f3a;
+    color: var(--text);
+}
+
+
+/* History Group Styling */
+.chat-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.group-title {
+    color: var(--sub);
+    font-size: 0.8em;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 5px 0 5px 15px;
+    margin-top: 10px;
+    letter-spacing: 0.5px;
+}
+
+.chat-history-item {
+    color: var(--text);
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color 0.2s;
+}
+
+.chat-history-item:hover {
+    background-color: var(--muted);
+}
+
+.chat-history-item.active {
+    background-color: var(--muted);
+    /* Active chat highlight */
+    color: var(--accent);
+    /* Optional: Highlight text with accent color */
+}
+
+
+/* Bottom User Profile Section */
+.user-profile-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #121212;
+    /* Darker bar at the bottom */
+    padding: 10px 15px;
+    border-radius: 12px;
+    margin-top: 10px;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.initials-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #00bcd4;
+    /* Example color (Canva blue/cyan from image) */
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 0.8em;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.85em;
+}
+
+.details .name {
+    font-weight: 600;
+    color: var(--text);
+}
+
+.details .plan {
+    color: var(--sub);
+}
+
+.upgrade-btn {
+    background-color: var(--upgrade-btn-bg);
+    color: var(--upgrade-btn-text);
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-size: 0.8em;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.upgrade-btn:hover {
+    background-color: #333;
+}
+
+
+/* ----------------------------------------------------- */
+/* --- MAIN CONTENT STYLING (No Changes) --- */
+/* ----------------------------------------------------- */
+
+.main-content {
+    background-color: var(--bg);
+    display: flex;
+    flex-direction: column;
+    padding: 20px 40px;
+    overflow-y: auto;
+}
+
+/* ... (Keep the rest of your original style.css from here onwards) ... */
+.main-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--muted);
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 8px var(--accent-light);
+}
+
+.welcome-section {
+    text-align: center;
+    margin: 40px 0;
+    position: relative;
+    padding-top: 50px;
+}
+
+.orange-orb {
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, var(--accent), transparent 70%);
+    border-radius: 50%;
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.8;
+    filter: blur(40px);
+}
+
+.welcome-section h1 {
+    font-size: 2.8em;
+    color: var(--text);
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.welcome-section p {
+    font-size: 1.2em;
+    color: var(--sub);
+    position: relative;
+}
+
+.prompt-suggestions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 40px;
+    flex-grow: 1;
+}
+
+/* --- CHAT DISPLAY AREA STYLES (for conversation history) --- */
+.chat-display {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Message Bubble Styling */
+.message {
+    max-width: 70%;
+    padding: 15px;
+    border-radius: 20px;
+    line-height: 1.5;
+    word-wrap: break-word;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.message p {
+    margin: 0;
+}
+
+.user {
+    align-self: flex-end;
+    background-color: var(--muted);
+    color: var(--text);
+    border-bottom-right-radius: 5px;
+}
+
+.assistant {
+    align-self: flex-start;
+    background-color: var(--panel);
+    color: var(--text);
+    border-bottom-left-radius: 5px;
+}
+
+.typing-indicator {
+    align-self: flex-start;
+    background-color: var(--panel);
+    color: var(--sub);
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-style: italic;
+    font-size: 0.9em;
+}
+
+
+/* --- INPUT CARD STYLING --- */
+.prompt-card {
+    background-color: var(--panel);
+    border-radius: var(--radius);
+    padding: 15px 20px;
+    display: flex;
+    align-items: flex-end;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.chat-input-card {
+    border: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+
+/* --- AUTOGROW TEXTAREA STYLES --- */
+.chat-input-field {
+    flex-grow: 1;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 1.1em;
+    outline: none;
+    padding: 5px 0;
+
+    resize: none;
+    overflow-y: hidden;
+    min-height: 25px;
+    line-height: 1.2;
+    margin-right: 15px;
+}
+
+.chat-input-field::placeholder {
+    color: var(--sub);
+}
+
+.action-btn {
+    background-color: var(--muted);
+    color: var(--text);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    padding: 8px 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9em;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.action-btn:hover {
+    background-color: #2a2f3a;
+}
+
+.action-btn .icon {
+    font-size: 1.1em;
+    color: var(--accent);
+}
+
+.send-message-btn {
+    background-color: var(--accent);
+    color: var(--bg);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(255, 153, 0, 0.6);
+    transition: background-color 0.2s ease;
+}
+
+.send-message-btn:hover {
+    background-color: var(--accent-light);
+}
+
+/* Scrollbar Styling */
+/* Removed old scrollbar styles and replaced with the 'none' properties above */
+
+/* ... (Other CSS for .sidebar and .sidebar-nav remains the same) ... */
+
+/* Bottom Auth Section */
+
+.google-login-btn {
+    /* Retro/Pixel style Google Sign-In */
+    background-color: var(--muted);
+    color: var(--text);
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    width: 100%;
+    border-radius: 10px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.google-login-btn:hover {
+    background-color: #2a2f3a;
+    box-shadow: 0 0 5px rgba(255, 106, 0, 0.5);
+    /* Subtle retro glow */
+}
+
+
+.profile-info-signed-in {
+    /* User details and logout (hidden by default) */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logout-btn {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: var(--sub);
+    transition: color 0.2s;
+}
+
+.logout-btn:hover {
+    color: var(--accent);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Update: .user-profile-bottom to handle both states */
+.user-profile-bottom {
+    display: flex;
+    /* Keep the flex layout */
+    justify-content: center;
+    /* Center the login button */
+    align-items: center;
+    background-color: var(--sidebar-bg-darker);
+    padding: 10px 15px;
+    border-radius: 12px;
+    margin-top: 10px;
+    /* Remove justify-content: space-between for the default state */
+}
+
+/* Ensure the profile info fills the space when active */
+#user-details-display.profile-info-signed-in {
+    justify-content: space-between;
+}
+
+/* --- NEW LOGO IMAGE STYLING --- */
+
+.logo-area {
+    display: flex;
+    /* Ensure the image and text are inline */
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-image {
+    /* Logo Image ප්‍රමාණය සකස් කිරීම */
+    width: 35px;
+    /* Adjust size as needed */
+    height: 35px;
+    object-fit: contain;
+    /* Ensure the image scales correctly */
+
+    /* ඔබගේ Retro Theme එකට ගැලපෙන පරිදි, දාර වටා Orange Glow එකක් එකතු කිරීම */
+    border-radius: 6px;
+    /* Slightly rounded edges for the retro feel */
+    border: 1px solid rgba(255, 106, 0, 0.5);
+    /* Subtle orange border */
+    box-shadow: 0 0 5px rgba(255, 106, 0, 0.4);
+    /* Gentle orange glow */
+}
+
+
+/* --- PREVIOUS LOGO ICON STYLING (OPTIONAL: Remove or keep for reference) --- */
+
+/* .logo-icon {
+    font-size: 1.5em;
+    color: var(--accent);
+} */
