@@ -54,12 +54,11 @@ let conversationHistory = []; // Local state for context in the *current* chat
 // ====================================================================
 
 function handleGoogleLogin() {
-    // Note: The CORS issue is usually solved by adding the GitHub domain 
-    // to the Firebase Authorized Domains list. (See our previous chat)
+    // Use signInWithPopup
     auth.signInWithPopup(googleProvider)
         .catch((error) => {
             console.error("Google Sign-In Error:", error);
-            alert("Login failed. Check the Firebase Console's 'Authorized domains' setting: " + error.message);
+            alert("Login failed. Check the Firebase Console's 'Authorized domains' and Ad Blocker settings: " + error.message);
         });
 }
 
@@ -156,7 +155,7 @@ function subscribeToChats() {
                 newChat(true); 
             } else if (!currentChatId || !chats.find(c => c.id === currentChatId)) {
                 // If the current chat ID is null or missing, select the latest one
-                selectChat(chats[0].id, chats);
+                selectChat(chats[0]?.id, chats); // Use optional chaining to prevent error if chats is empty
             } else {
                 // Otherwise, just re-render messages for the currently selected chat
                 renderChatMessages(chats.find(c => c.id === currentChatId));
@@ -191,6 +190,8 @@ async function newChat(select = true) {
 }
 
 function selectChat(id, chats) {
+    if (!id) return; 
+
     currentChatId = id;
     const chat = chats.find(c => c.id === id);
     
@@ -255,7 +256,7 @@ function showInitialMessage() {
 }
 
 // ====================================================================
-// 6. MESSAGE SENDING & API INTERACTION 
+// 6. MESSAGE SENDING & API INTERACTION (Error Fix Applied)
 // ====================================================================
 
 function addMessage(text, sender) {
@@ -288,8 +289,8 @@ async function sendMessage() {
     conversationHistory.push({ role: "user", parts: [{ text: userText }] });
 
     // Update chat title if it's "New chat..."
-    // NOTE: This is a simple logic. A better way is to check the current chat's actual title property.
-    if (document.querySelector('.chat-history-item.active')?.textContent.includes('New chat...')) { 
+    const activeChatTitle = document.querySelector('.chat-history-item.active')?.textContent;
+    if (activeChatTitle && activeChatTitle.includes('New chat...')) { 
         updates.title = userText.substring(0, 30) + (userText.length > 30 ? '...' : '');
     }
 
@@ -313,8 +314,10 @@ async function sendMessage() {
         // 4. Call the Gemini API with the full conversation history
         const responseText = await fetchGeminiResponse(); 
 
-        // 5. Remove typing indicator and display assistant's response
-        chatBox.removeChild(typingIndicator);
+        // 5. Remove typing indicator safely and display assistant's response
+        if (typingIndicator && chatBox.contains(typingIndicator)) { // ✅ ERROR FIX 1
+            chatBox.removeChild(typingIndicator);
+        }
         addMessage(responseText, 'assistant');
 
         // 6. Update local history and save assistant's message to Firestore
@@ -327,9 +330,13 @@ async function sendMessage() {
 
     } catch (error) {
         console.error("Gemini API Error or Firestore Save Error:", error);
-        chatBox.removeChild(typingIndicator);
         
-        const errorMessage = "Sorry, I encountered an error. Check the console and ensure your Firebase domains are authorized.";
+        // ⚠️ Remove typing indicator safely even if an error occurs
+        if (typingIndicator && chatBox.contains(typingIndicator)) { // ✅ ERROR FIX 2
+            chatBox.removeChild(typingIndicator);
+        }
+        
+        const errorMessage = "Sorry, I encountered an error. Check the console and ensure your Firebase domains are authorized/Ad Blocker is disabled.";
         addMessage(errorMessage, 'assistant');
 
         // Save the error message to Firestore as well
