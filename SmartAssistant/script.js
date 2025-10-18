@@ -4,12 +4,12 @@
 // ====================================================================
 
 const firebaseConfig = {
-    apiKey: "AIzaSyD0eoNP13agRvcbaPV-hyJBkH7tFRwBMGs",
-    authDomain: "cube-ai-b4f3f.firebaseapp.com",
-    projectId: "cube-ai-b4f3f",
-    storageBucket: "cube-ai-b4f3f.firebasestorage.app",
-    messagingSenderId: "1003057344095",
-    appId: "1:1003057344095:web:d26b043bed79ed30f2f5ea",
+   apiKey: "AIzaSyD0eoNP13agRvcbaPV-hyJBkH7tFRwBMGs",
+   authDomain: "cube-ai-b4f3f.firebaseapp.com",
+   projectId: "cube-ai-b4f3f",
+   storageBucket: "cube-ai-b4f3f.firebasestorage.app",
+   messagingSenderId: "1003057344095",
+   appId: "1:1003057344095:web:d26b043bed79ed30f2f5ea",
 };
 
 // Initialize Firebase App
@@ -381,5 +381,6 @@ userInput.addEventListener('keypress', function (e) {
         sendMessage();
     }
 });
+
 
 userInput.addEventListener('input', autoResizeTextarea);
