@@ -47,6 +47,8 @@ let currentUserID = null;
 let userChatsRef = null; 
 let unsubscribeFromChats = null; 
 let conversationHistory = []; // Local state for context in the *current* chat
+let isSendingMessage = false; // ⬅️ NEW: Flag to prevent re-render while typing
+let isChatSyncing = false; // Flag to know if the chat is currently being set up
 
 
 // ====================================================================
@@ -54,7 +56,6 @@ let conversationHistory = []; // Local state for context in the *current* chat
 // ====================================================================
 
 function handleGoogleLogin() {
-    // Use signInWithPopup
     auth.signInWithPopup(googleProvider)
         .catch((error) => {
             console.error("Google Sign-In Error:", error);
@@ -147,19 +148,23 @@ function subscribeToChats() {
                 ...doc.data()
             }));
             
-            // Render History 
+            // Render History (Sidebar)
             renderChatHistory(chats);
 
             if (chats.length === 0) {
-                // If no chats exist, create a new one automatically
                 newChat(true); 
             } else if (!currentChatId || !chats.find(c => c.id === currentChatId)) {
-                // If the current chat ID is null or missing, select the latest one
-                selectChat(chats[0]?.id, chats); // Use optional chaining to prevent error if chats is empty
-            } else {
-                // Otherwise, just re-render messages for the currently selected chat
+                isChatSyncing = true; // Set flag when first selecting a chat
+                selectChat(chats[0]?.id, chats); 
+            } else if (!isSendingMessage && !isChatSyncing) { // ⬅️ FIX: Only re-render if not sending or initial sync is done
                 renderChatMessages(chats.find(c => c.id === currentChatId));
             }
+            
+            // isChatSyncing should be handled after selectChat is called
+            if (isChatSyncing && currentChatId) {
+                 isChatSyncing = false;
+            }
+
         }, error => {
             console.error("Firestore Chats Listener Error:", error);
         });
@@ -298,10 +303,13 @@ async function sendMessage() {
     autoResizeTextarea();
 
     // 2. Show typing indicator
-    const typingIndicator = addMessage('Assistant is typing...', 'typing-indicator');
+    const typingIndicator = addMessage('Assistant is typing...', 'typing-indicator'); // ⬅️ Indicator is added
+    
+    isSendingMessage = true; // ⬅️ FIX: Set flag ON immediately
 
     // 3. Save user message and title update to Firestore
     try {
+        // This update triggers the onSnapshot listener, which is now blocked by the flag
         await chatDocRef.update({
             ...updates, 
             messages: firebase.firestore.FieldValue.arrayUnion(userMessageForSave)
@@ -315,7 +323,7 @@ async function sendMessage() {
         const responseText = await fetchGeminiResponse(); 
 
         // 5. Remove typing indicator safely and display assistant's response
-        if (typingIndicator && chatBox.contains(typingIndicator)) { // ✅ ERROR FIX 1
+        if (typingIndicator && chatBox.contains(typingIndicator)) { 
             chatBox.removeChild(typingIndicator);
         }
         addMessage(responseText, 'assistant');
@@ -332,7 +340,7 @@ async function sendMessage() {
         console.error("Gemini API Error or Firestore Save Error:", error);
         
         // ⚠️ Remove typing indicator safely even if an error occurs
-        if (typingIndicator && chatBox.contains(typingIndicator)) { // ✅ ERROR FIX 2
+        if (typingIndicator && chatBox.contains(typingIndicator)) { 
             chatBox.removeChild(typingIndicator);
         }
         
@@ -344,6 +352,8 @@ async function sendMessage() {
         chatDocRef.update({
             messages: firebase.firestore.FieldValue.arrayUnion(errorMsg)
         }).catch(err => console.error("Final error saving message:", err));
+    } finally {
+        isSendingMessage = false; // ⬅️ FIX: Always turn flag OFF after API attempt
     }
 }
 
@@ -397,4 +407,3 @@ if(userInput) {
 
     userInput.addEventListener('input', autoResizeTextarea);
 }
-
