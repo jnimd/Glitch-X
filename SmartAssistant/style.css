@@ -628,10 +628,149 @@ body {
     /* Gentle orange glow */
 }
 
+/* ========================================= */
+/* --- AUTHENTICATION & USER PROFILE STYLES --- */
+/* ========================================= */
+
+/* Sidebar එකේ Log-in / User Info Section එක */
+.auth-section {
+    padding: 15px;
+    margin-top: auto; /* Push to the bottom of the sidebar */
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+}
+
+/* Common style for buttons */
+.login-btn, .logout-btn {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: 'Press Start 2P', cursive;
+    letter-spacing: 0.5px;
+    transition: background-color 0.2s;
+}
+
+/* Google Sign-in Button Style */
+.login-btn {
+    width: 100%;
+    background-color: var(--accent); /* Orange */
+    color: var(--panel); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 10px rgba(255, 106, 0, 0.4);
+}
+
+.login-btn .icon {
+    font-family: Arial, sans-serif; /* Use a non-pixel font for the G icon */
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--text); 
+    background-color: #4285F4; /* Google Blue */
+    padding: 3px 6px;
+    border-radius: 3px;
+    line-height: 1;
+}
+
+.login-btn:hover {
+    background-color: var(--accent-light);
+}
+
+/* User Details Display (Signed-in state) */
+.user-details-display {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background-color: var(--muted);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.user-details-display .user-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    color: var(--panel);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.user-details-display .user-name {
+    flex-grow: 1;
+    margin: 0 10px;
+    color: var(--text);
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Logout Button */
+.logout-btn {
+    background-color: transparent;
+    color: var(--sub);
+    padding: 5px 8px;
+    border: 1px solid var(--sub);
+    font-size: 10px; /* Smaller font for retro feel */
+    border-radius: 5px;
+}
+
+.logout-btn:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background-color: rgba(255, 106, 0, 0.1);
+}
+
+/* Utility Class */
+.hidden {
+    display: none !important;
+}
+
+/* General Sidebar Layout Adjustments (Ensure push to bottom works) */
+.sidebar {
+    display: flex;
+    flex-direction: column; /* This is crucial for pushing the auth-section to the bottom */
+}
+
+/* Make sure the nav doesn't take up all the space */
+.sidebar-nav {
+    flex-grow: 1; 
+    overflow-y: auto; /* Allow scrolling for history */
+    margin-top: 10px;
+}
+
+/* Chat History Items Styling */
+.chat-group {
+    margin-bottom: 20px;
+}
+
+.chat-group .nav-link {
+    font-size: 12px;
+    padding: 8px 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chat-group .nav-link.active, 
+.chat-group .nav-link:hover {
+    background-color: var(--muted);
+}
+
 
 /* --- PREVIOUS LOGO ICON STYLING (OPTIONAL: Remove or keep for reference) --- */
 
 /* .logo-icon {
     font-size: 1.5em;
     color: var(--accent);
+
 } */
