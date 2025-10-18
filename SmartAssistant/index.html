@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glitch Cube - Chatbot</title>
+    <title>Glitch Cube</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -16,17 +16,29 @@
 
             <div class="sidebar-header">
                 <div class="logo-area">
-                    <img src="bat2.png" alt="Cube AI Logo" class="logo-image">
+                    <img src="bat2.png" alt="BuildHub Logo" class="logo-image">
                     <span class="logo-text">Cube AI</span>
                 </div>
                 <button class="menu-toggle-btn">
                     <span class="icon">◻️</span>
                 </button>
             </div>
-
-            <button class="new-chat-btn" id="new-chat-button">
+            
+            <button class="new-chat-btn" id="new-chat-button" disabled>
                 <span class="icon">✏️</span> New chat
             </button>
+            
+            <div class="auth-section">
+                <button class="login-btn" id="google-login-button">
+                    <span class="icon">G</span> Sign in with Google
+                </button>
+                
+                <div class="user-details-display hidden" id="user-details-display">
+                    <div class="user-avatar" id="user-initials">--</div>
+                    <span class="user-name" id="user-display-name">Guest</span>
+                    <button class="logout-btn" id="logout-button">Logout</button>
+                </div>
+            </div>
 
             <nav class="sidebar-nav">
                 <a href="#" class="nav-link search-link">
@@ -35,6 +47,7 @@
 
                 <div class="chat-group" id="chats-list-container">
                     <div class="group-title">CHATS</div>
+                    <p class="history-note">Sign in to view history.</p>
                 </div>
 
                 <div class="chat-group">
@@ -55,10 +68,7 @@
                 </a>
 
             </nav>
-
-            <div class="user-profile-bottom" id="user-auth-section">
-            </div>
-
+            
         </aside>
 
 
@@ -73,22 +83,22 @@
             <section class="welcome-section">
                 <div class="orange-orb"></div>
                 <h1 class="retro-text">Welcome To CUBE AI</h1>
-                <p class="sub-text">Start chatting now. Your progress will be saved as 'DEV_USER'.</p>
+                <p class="sub-text">Please Sign in with Google to start chatting.</p>
             </section>
 
             <section class="prompt-suggestions">
 
                 <div class="chat-display" id="main-chat-display">
-                </div>
+                    </div>
 
                 <div class="prompt-card chat-input-card">
-                    <textarea id="user-input" placeholder="Start chatting..." class="chat-input-field"
-                        rows="1"></textarea>
+                    <textarea id="user-input" placeholder="Sign in to start chatting..." class="chat-input-field"
+                        rows="1" disabled></textarea>
 
-                    <button class="action-btn">
+                    <button class="action-btn" disabled>
                         <span class="icon">🤖</span> CUBE Beta
                     </button>
-                    <button class="send-message-btn" id="send-button">↗</button>
+                    <button class="send-message-btn" id="send-button" disabled>↗</button>
                 </div>
 
             </section>
