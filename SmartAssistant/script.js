@@ -1,10 +1,10 @@
 // ====================================================================
 // 1. FIREBASE CONFIG & INITIALIZATION 
-//    🚨🚨🚨 YOU MUST REPLACE THESE PLACEHOLDERS WITH YOUR ACTUAL FIREBASE KEYS! 🚨🚨🚨
+// ... (UNTOUCHED)
 // ====================================================================
 const firebaseConfig = {
     // ⚠️ REPLACE WITH YOUR ACTUAL FIREBASE API KEY!
-    apiKey: "AIzaSyD0eoNP13agRvcbaPV-hyJBkH7tFRwBMGs", 
+    apiKey: "AIzaSyD0eoNP13agRvcbaPV-hyJBkH7tFRwBMGs",
     authDomain: "cube-ai-b4f3f.firebaseapp.com",
     projectId: "cube-ai-b4f3f",
     storageBucket: "cube-ai-b4f3f.firebasestorage.app",
@@ -21,19 +21,20 @@ const googleProvider = new firebase.auth.GoogleAuthProvider();
 
 // ====================================================================
 // 2. GEMINI API CONFIG (ඔබ ලබා දුන් Key එක යොදා ඇත)
+// ... (UNTOUCHED)
 // ====================================================================
-const GEMINI_API_KEY = "AIzaSyCh4lGPRj5Yq3BT-U6ElOSaBmrdCvRhM5U"; 
+const GEMINI_API_KEY = "AIzaSyCh4lGPRj5Yq3BT-U6ElOSaBmrdCvRhM5U";
 const API_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + GEMINI_API_KEY;
 
 
 // ====================================================================
-// 3. UI ELEMENTS & GLOBAL STATE
+// 3. UI ELEMENTS & GLOBAL STATE (UPDATED)
 // ====================================================================
 const chatBox = document.getElementById('main-chat-display');
 const userInput = document.getElementById('user-input');
 const sendButton = document.getElementById('send-button');
 const newChatButton = document.getElementById('new-chat-button');
-const chatsListContainer = document.getElementById('chats-list-container'); 
+const chatsListContainer = document.getElementById('chats-list-container');
 
 // Auth UI elements
 const loginButton = document.getElementById('google-login-button');
@@ -42,17 +43,34 @@ const userDetailsDisplay = document.getElementById('user-details-display');
 const userInitials = document.getElementById('user-initials');
 const userDisplayName = document.getElementById('user-display-name');
 
+// 💥 UPDATED: Tools Menu elements - Reverted to use 'add-button' for the toggle
+
+const toolsToggleButton = document.getElementById('tools-toggle-button'); // The 'Tools' button (Currently unused for logic, but kept for future expansion)
+
+const voiceInputButton = document.getElementById('voice-input-button'); // 💥 NEW: Voice Input Button
+
+// Model Selector Elements (NEW)
+const modelDropdownBtn = document.getElementById('model-dropdown-button');
+const modelDropdownMenu = document.getElementById('model-dropdown-menu');
+const selectedModelVersionSpan = document.getElementById('selected-model-version');
+const addButton = document.getElementById('add-button'); // The '+' icon (for files)
+const toolsButton = document.getElementById('tools-button'); // The 'Tools' pill button (for AI tools)
+
+const fileToolsMenu = document.getElementById('file-tools-menu'); // The new menu for '+'
+const toolsMenu = document.getElementById('tools-menu'); // The original menu (now for 'Tools' button)
+
 let currentChatId = null;
 let currentUserID = null;
-let userChatsRef = null; 
-let unsubscribeFromChats = null; 
+let userChatsRef = null;
+let unsubscribeFromChats = null;
 let conversationHistory = []; // Local state for context in the *current* chat
-let isSendingMessage = false; // ⬅️ NEW: Flag to prevent re-render while typing
+let isSendingMessage = false; // Flag to prevent re-render while typing
 let isChatSyncing = false; // Flag to know if the chat is currently being set up
 
 
 // ====================================================================
-// 4. AUTHENTICATION LOGIC (Google Sign-In)
+// 4. AUTHENTICATION LOGIC
+// ... (UNCHANGED)
 // ====================================================================
 
 function handleGoogleLogin() {
@@ -75,24 +93,29 @@ function handleLogout() {
  */
 function updateAuthUI(user) {
     const isUserLoggedIn = !!user;
-    
+
     // Toggle UI Elements
-    if(loginButton) loginButton.classList.toggle('hidden', isUserLoggedIn);
-    if(userDetailsDisplay) userDetailsDisplay.classList.toggle('hidden', !isUserLoggedIn);
-    if(newChatButton) newChatButton.disabled = !isUserLoggedIn;
-    if(sendButton) sendButton.disabled = !isUserLoggedIn;
-    if(userInput) userInput.disabled = !isUserLoggedIn;
+    if (loginButton) loginButton.classList.toggle('hidden', isUserLoggedIn);
+    if (userDetailsDisplay) userDetailsDisplay.classList.toggle('hidden', !isUserLoggedIn);
+    if (newChatButton) newChatButton.disabled = !isUserLoggedIn;
+    if (sendButton) sendButton.disabled = !isUserLoggedIn;
+    if (userInput) userInput.disabled = !isUserLoggedIn;
+
+    // 💥 UPDATED: Enable/Disable buttons
+    if (addButton) addButton.disabled = !isUserLoggedIn;
+    if (toolsToggleButton) toolsToggleButton.disabled = !isUserLoggedIn;
+    if (voiceInputButton) voiceInputButton.disabled = !isUserLoggedIn; // 💥 NEW
 
     if (user) {
         // Logged In State
         currentUserID = user.uid;
         userChatsRef = db.collection('users').doc(user.uid).collection('chats');
-        
+
         // Update user display info
-        if(userDisplayName) userDisplayName.textContent = user.displayName ? user.displayName.split(' ')[0] : 'User';
-        if(userInitials) userInitials.textContent = user.displayName ? user.displayName.split(' ').map(n => n[0]).join('').substring(0, 2) : 'U';
-        
-        if(userInput) userInput.placeholder = "Start chatting...";
+        if (userDisplayName) userDisplayName.textContent = user.displayName ? user.displayName.split(' ')[0] : 'User';
+        if (userInitials) userInitials.textContent = user.displayName ? user.displayName.split(' ').map(n => n[0]).join('').substring(0, 2) : 'U';
+
+        if (userInput) userInput.placeholder = "Ask Cube anything...";
 
         // Hide welcome section after login
         const welcomeSection = document.querySelector('.welcome-section');
@@ -106,17 +129,17 @@ function updateAuthUI(user) {
         currentChatId = null;
         userChatsRef = null;
         conversationHistory = [];
-        
+
         if (unsubscribeFromChats) {
             unsubscribeFromChats();
             unsubscribeFromChats = null;
         }
 
-        if(chatBox) chatBox.innerHTML = ''; // Clear main chat display
-        if(chatsListContainer) chatsListContainer.innerHTML = '<div class="group-title">CHATS</div><p class="history-note">Sign in to view history.</p>';
+        if (chatBox) chatBox.innerHTML = ''; // Clear main chat display
+        if (chatsListContainer) chatsListContainer.innerHTML = '<div class="group-title">CHATS</div><p class="history-note">Sign in to view history.</p>';
 
-        if(userInput) userInput.placeholder = "Sign in to start chatting...";
-        
+        if (userInput) userInput.placeholder = "Sign in to start chatting...";
+
         // Show Welcome Section when logged out
         const welcomeSection = document.querySelector('.welcome-section');
         if (welcomeSection) welcomeSection.style.display = 'block';
@@ -124,14 +147,15 @@ function updateAuthUI(user) {
 }
 
 // Attach listeners to Auth buttons
-if(loginButton) loginButton.addEventListener('click', handleGoogleLogin);
-if(logoutButton) logoutButton.addEventListener('click', handleLogout);
+if (loginButton) loginButton.addEventListener('click', handleGoogleLogin);
+if (logoutButton) logoutButton.addEventListener('click', handleLogout);
 
 // Listen for Auth state changes
 auth.onAuthStateChanged(updateAuthUI);
 
 // ====================================================================
 // 5. FIRESTORE & CHAT HISTORY LOGIC
+// ... (UNCHANGED)
 // ====================================================================
 function subscribeToChats() {
     if (!userChatsRef || !chatsListContainer) return;
@@ -147,22 +171,21 @@ function subscribeToChats() {
                 id: doc.id,
                 ...doc.data()
             }));
-            
+
             // Render History (Sidebar)
             renderChatHistory(chats);
 
             if (chats.length === 0) {
-                newChat(true); 
+                newChat(true);
             } else if (!currentChatId || !chats.find(c => c.id === currentChatId)) {
                 isChatSyncing = true; // Set flag when first selecting a chat
-                selectChat(chats[0]?.id, chats); 
-            } else if (!isSendingMessage && !isChatSyncing) { // ⬅️ FIX: Only re-render if not sending or initial sync is done
+                selectChat(chats[0]?.id, chats);
+            } else if (!isSendingMessage && !isChatSyncing) {
                 renderChatMessages(chats.find(c => c.id === currentChatId));
             }
-            
-            // isChatSyncing should be handled after selectChat is called
+
             if (isChatSyncing && currentChatId) {
-                 isChatSyncing = false;
+                isChatSyncing = false;
             }
 
         }, error => {
@@ -185,9 +208,9 @@ async function newChat(select = true) {
         if (select) {
             currentChatId = docRef.id;
             conversationHistory = []; // Reset local history for new chat
-            if(chatBox) chatBox.innerHTML = '';
+            if (chatBox) chatBox.innerHTML = '';
             showInitialMessage();
-            if(userInput) userInput.focus();
+            if (userInput) userInput.focus();
         }
     } catch (e) {
         console.error("Error creating new chat:", e);
@@ -195,31 +218,31 @@ async function newChat(select = true) {
 }
 
 function selectChat(id, chats) {
-    if (!id) return; 
+    if (!id) return;
 
     currentChatId = id;
     const chat = chats.find(c => c.id === id);
-    
+
     if (chat) {
         // Load messages into the local history for context in Gemini API call
         conversationHistory = chat.messages.map(msg => ({
-            role: msg.sender === 'user' ? 'user' : 'model', 
+            role: msg.sender === 'user' ? 'user' : 'model',
             parts: [{ text: msg.text }]
         }));
         renderChatMessages(chat);
     }
-    if(userInput) userInput.focus();
+    if (userInput) userInput.focus();
 }
 
 function renderChatHistory(chats) {
-    if (!chatsListContainer) return; 
+    if (!chatsListContainer) return;
 
     const chatGroup = chatsListContainer;
     chatGroup.innerHTML = '<div class="group-title">CHATS</div>'; // Clear existing chats
 
     if (chats.length === 0) {
-         chatGroup.innerHTML += '<p class="history-note">No chats yet. Start one!</p>';
-         return;
+        chatGroup.innerHTML += '<p class="history-note">No chats yet. Start one!</p>';
+        return;
     }
 
     chats.forEach(chat => {
@@ -232,7 +255,7 @@ function renderChatHistory(chats) {
         item.textContent = chat.title || "Untitled Chat";
         item.addEventListener('click', (e) => {
             e.preventDefault();
-            selectChat(chat.id, chats); 
+            selectChat(chat.id, chats);
         });
         chatGroup.appendChild(item);
     });
@@ -242,7 +265,7 @@ function renderChatMessages(chat) {
     const welcomeSection = document.querySelector('.welcome-section');
     if (welcomeSection) welcomeSection.style.display = 'none';
 
-    if(chatBox) chatBox.innerHTML = ''; 
+    if (chatBox) chatBox.innerHTML = '';
 
     if (chat && chat.messages && chat.messages.length > 0) {
         chat.messages.forEach(msg => {
@@ -251,23 +274,24 @@ function renderChatMessages(chat) {
     } else {
         showInitialMessage();
     }
-    if(chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+    if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
 }
 
 function showInitialMessage() {
     const initialMsg = document.createElement('div');
     initialMsg.innerHTML = '<p class="sub-text" style="text-align:center; padding-top:20px;">Your new conversation starts here. Ask me anything!</p>';
-    if(chatBox) chatBox.appendChild(initialMsg);
+    if (chatBox) chatBox.appendChild(initialMsg);
 }
 
 // ====================================================================
-// 6. MESSAGE SENDING & API INTERACTION (Error Fix Applied)
+// 6. MESSAGE SENDING & API INTERACTION 
+// ... (UNCHANGED)
 // ====================================================================
 
 function addMessage(text, sender) {
     const welcomeSection = document.querySelector('.welcome-section');
     if (welcomeSection) welcomeSection.style.display = 'none';
-    
+
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('message', sender);
     const paragraph = document.createElement('p');
@@ -281,7 +305,7 @@ function addMessage(text, sender) {
 
 async function sendMessage() {
     const userText = userInput.value.trim();
-    if (userText === '' || !currentChatId || !currentUserID) return; 
+    if (userText === '' || !currentChatId || !currentUserID) return;
 
     const chatDocRef = userChatsRef.doc(currentChatId);
 
@@ -295,7 +319,7 @@ async function sendMessage() {
 
     // Update chat title if it's "New chat..."
     const activeChatTitle = document.querySelector('.chat-history-item.active')?.textContent;
-    if (activeChatTitle && activeChatTitle.includes('New chat...')) { 
+    if (activeChatTitle && activeChatTitle.includes('New chat...')) {
         updates.title = userText.substring(0, 30) + (userText.length > 30 ? '...' : '');
     }
 
@@ -303,15 +327,14 @@ async function sendMessage() {
     autoResizeTextarea();
 
     // 2. Show typing indicator
-    const typingIndicator = addMessage('Assistant is typing...', 'typing-indicator'); // ⬅️ Indicator is added
-    
-    isSendingMessage = true; // ⬅️ FIX: Set flag ON immediately
+    const typingIndicator = addMessage('Assistant is typing...', 'typing-indicator');
+
+    isSendingMessage = true;
 
     // 3. Save user message and title update to Firestore
     try {
-        // This update triggers the onSnapshot listener, which is now blocked by the flag
         await chatDocRef.update({
-            ...updates, 
+            ...updates,
             messages: firebase.firestore.FieldValue.arrayUnion(userMessageForSave)
         });
     } catch (e) {
@@ -320,10 +343,10 @@ async function sendMessage() {
 
     try {
         // 4. Call the Gemini API with the full conversation history
-        const responseText = await fetchGeminiResponse(); 
+        const responseText = await fetchGeminiResponse();
 
         // 5. Remove typing indicator safely and display assistant's response
-        if (typingIndicator && chatBox.contains(typingIndicator)) { 
+        if (typingIndicator && chatBox.contains(typingIndicator)) {
             chatBox.removeChild(typingIndicator);
         }
         addMessage(responseText, 'assistant');
@@ -338,12 +361,12 @@ async function sendMessage() {
 
     } catch (error) {
         console.error("Gemini API Error or Firestore Save Error:", error);
-        
+
         // ⚠️ Remove typing indicator safely even if an error occurs
-        if (typingIndicator && chatBox.contains(typingIndicator)) { 
+        if (typingIndicator && chatBox.contains(typingIndicator)) {
             chatBox.removeChild(typingIndicator);
         }
-        
+
         const errorMessage = "Sorry, I encountered an error. Check the console and ensure your Firebase domains are authorized/Ad Blocker is disabled.";
         addMessage(errorMessage, 'assistant');
 
@@ -353,14 +376,24 @@ async function sendMessage() {
             messages: firebase.firestore.FieldValue.arrayUnion(errorMsg)
         }).catch(err => console.error("Final error saving message:", err));
     } finally {
-        isSendingMessage = false; // ⬅️ FIX: Always turn flag OFF after API attempt
+        isSendingMessage = false;
     }
 }
 
 
 // ====================================================================
-// 7. UTILITY FUNCTIONS & EVENT LISTENERS
+// 7. UTILITY FUNCTIONS & EVENT LISTENERS (UPDATED)
 // ====================================================================
+
+/**
+ * 💥 UPDATED: Tools Menu Toggle Function - Now triggered by the '+' icon
+ */
+function toggleToolsMenu() {
+    if (toolsMenu) {
+        toolsMenu.classList.toggle('hidden');
+    }
+}
+
 
 async function fetchGeminiResponse() {
     const payload = { contents: conversationHistory }; // Sends the full context
@@ -384,20 +417,20 @@ async function fetchGeminiResponse() {
 }
 
 function autoResizeTextarea() {
-    if(userInput) {
+    if (userInput) {
         userInput.style.height = 'auto';
         userInput.style.height = userInput.scrollHeight + 'px';
     }
 }
 
 // Attach all event listeners
-if(sendButton) sendButton.addEventListener('click', sendMessage);
+if (sendButton) sendButton.addEventListener('click', sendMessage);
 
-if(newChatButton) newChatButton.addEventListener('click', () => {
+if (newChatButton) newChatButton.addEventListener('click', () => {
     if (currentUserID) newChat(true); // Only create new chat if logged in
 });
 
-if(userInput) {
+if (userInput) {
     userInput.addEventListener('keypress', function (e) {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
@@ -406,4 +439,123 @@ if(userInput) {
     });
 
     userInput.addEventListener('input', autoResizeTextarea);
+}
+
+// 💥 UPDATED: Attach click listener to the '+' (addButton) to show the tools menu
+if (addButton) addButton.addEventListener('click', toggleToolsMenu);
+
+// Note: voiceInputButton and toolsToggleButton don't have dedicated functions yet,
+// but they are now available in the DOM to be used later.
+
+// Close menu if any tool is clicked
+if (toolsMenu) {
+    toolsMenu.querySelectorAll('.tool-item').forEach(item => {
+        item.addEventListener('click', toggleToolsMenu);
+    });
+}
+
+// Function to handle model selection visual updates
+function updateModelSelection(selectedItem) {
+    // 1. Remove 'selected' class and checkmark from all
+    document.querySelectorAll('.dropdown-item').forEach(item => {
+        item.classList.remove('selected');
+        const checkIcon = item.querySelector('.fa-check-circle');
+        if (checkIcon) {
+            checkIcon.remove();
+        }
+    });
+
+    // 2. Add 'selected' class and checkmark to the new item
+    selectedItem.classList.add('selected');
+    const modelVersion = selectedItem.dataset.model;
+    selectedModelVersionSpan.textContent = modelVersion; // Update button text
+
+    // Add the checkmark icon to the selected item
+    const checkIcon = document.createElement('i');
+    checkIcon.classList.add('fas', 'fa-check-circle');
+    selectedItem.appendChild(checkIcon);
+
+    // 3. Hide menu
+    modelDropdownMenu.classList.add('hidden');
+    modelDropdownMenu.classList.remove('visible');
+
+    // 4. (Future) Logic to change the actual Gemini Model goes here 
+    // console.log("Model changed to:", modelVersion);
+}
+
+// 4. Model Dropdown Listeners (NEW)
+if (modelDropdownBtn) {
+    modelDropdownBtn.addEventListener('click', (event) => {
+        event.stopPropagation(); // Stop click from propagating to document listener below
+        modelDropdownMenu.classList.toggle('hidden');
+        modelDropdownMenu.classList.toggle('visible');
+    });
+}
+
+if (modelDropdownMenu) {
+    modelDropdownMenu.addEventListener('click', (event) => {
+        const selectedItem = event.target.closest('.dropdown-item');
+        if (selectedItem) {
+            updateModelSelection(selectedItem);
+        }
+    });
+}
+
+// Close model menu when clicking outside
+document.addEventListener('click', (event) => {
+    if (modelDropdownMenu && modelDropdownBtn) {
+        if (!modelDropdownMenu.contains(event.target) && !modelDropdownBtn.contains(event.target)) {
+            modelDropdownMenu.classList.add('hidden');
+            modelDropdownMenu.classList.remove('visible');
+        }
+    }
+});
+
+// 5. Initialize the checkmark for the default selected model (AI Pro)
+const defaultProModel = document.querySelector('.dropdown-item[data-model="AI Pro"]');
+if (defaultProModel && selectedModelVersionSpan) {
+    // Only run the selection update if it hasn't been done yet and matches the default text
+    if (!defaultProModel.classList.contains('selected')) {
+        updateModelSelection(defaultProModel);
+    }
+}
+
+// ...
+
+// ...
+
+/**
+ * 💥 UPDATED: Tools Menu Toggle Function - Now triggered by the '+' icon
+ */
+function toggleToolsMenu() {
+    if (toolsMenu) {
+        toolsMenu.classList.toggle('hidden');
+    }
+}
+// ...
+// 💥 UPDATED: Attach click listener to the '+' (addButton) to show the tools menu
+if (addButton) addButton.addEventListener('click', toggleToolsMenu);
+// ...
+
+// ====================================================================
+// 💥 NEW: MOBILE SIDEBAR TOGGLE LOGIC
+// ====================================================================
+const menuToggleBtn = document.getElementById('menu-toggle-button');
+const mobileSidebar = document.getElementById('mobile-sidebar');
+const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+if (menuToggleBtn && mobileSidebar && sidebarOverlay) {
+    // Function to open/close the sidebar
+    function toggleSidebar() {
+        // Sidebar එකේ closed-mobile class එක toggle කරයි
+        mobileSidebar.classList.toggle('closed-mobile');
+        // Overlay එකේ visible-mobile class එක toggle කරයි
+        sidebarOverlay.classList.toggle('visible-mobile');
+    }
+
+    // Menu button එක press කළ විට
+    menuToggleBtn.addEventListener('click', toggleSidebar);
+
+    // Overlay එක press කරද්දී sidebar එක close වෙන්න
+    sidebarOverlay.addEventListener('click', toggleSidebar);
 }
