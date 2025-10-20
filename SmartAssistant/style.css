@@ -956,6 +956,66 @@ body {
 
 /* --- 💥 MOBILE / TABLET RESPONSIVENESS (Max Width: 900px) --- */
 
+/* ----------------------------------------------------- */
+/* 💥 NEW: VIDEO LOADING SCREEN STYLES */
+/* ----------------------------------------------------- */
+
+#video-loader {
+    position: fixed;
+    /* Screen එකේ හැම තැනම වසන්න */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    /* Full Viewport Width */
+    height: 100vh;
+    /* Full Viewport Height */
+    z-index: 9999;
+    /* අනිත් elements වලට උඩින් පෙන්වන්න */
+    background-color: var(--bg);
+    /* Video එක load වෙද්දී background එකට color එකක් දෙන්න */
+    opacity: 1;
+    transition: opacity 1s ease-out;
+    /* Smooth transition එකක් සඳහා */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#video-loader.fade-out {
+    opacity: 0;
+    pointer-events: none;
+    /* fade out උනාට පස්සේ click කරන්න බැරි වෙන්න */
+}
+
+#loading-video {
+    /* Video එක full screen cover වීමට */
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    /* Aspect ratio එක maintain කරමින් cover වීමට */
+}
+
+/* 💥 NEW: App content එක default විදියට hidden තියන්න */
+#app-content {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+
+#app-content.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Input Field එකේ Padding හදමු */
+/* ... (අනෙකුත් styles) ... */
+
 @media (max-width: 900px) {
 
     /* 1. ප්‍රධාන Container එක - 💥 Full Screen Fix */
@@ -1167,6 +1227,3 @@ body {
     }
 
 }
-
-/* Input Field එකේ Padding හදමු */
-/* ... (අනෙකුත් styles) ... */
