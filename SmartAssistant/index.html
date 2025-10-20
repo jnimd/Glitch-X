@@ -5,44 +5,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glitch Cube</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet">
+
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="app-container">
 
-        <aside class="sidebar">
+        <aside class="sidebar closed-mobile" id="mobile-sidebar">
 
-            <div class="sidebar-header">
-                <div class="logo-area">
-                    <img src="bat2.png" alt="BuildHub Logo" class="logo-image">
-                    <span class="logo-text">Cube AI</span>
+            <div class="sidebar-top-fixed">
+                <div class="sidebar-header">
+                    <div class="logo-area">
+                        <img src="bat2.png" alt="BuildHub Logo" class="logo-image">
+                        <span class="logo-text">Cube AI</span>
+                    </div>
                 </div>
-                <button class="menu-toggle-btn">
-                    <span class="icon">◻️</span>
+
+                <button class="new-chat-btn" id="new-chat-button" disabled>
+                    <span class="icon"><i class="fas fa-plus"></i></span> New chat
                 </button>
             </div>
-            
-            <button class="new-chat-btn" id="new-chat-button" disabled>
-                <span class="icon">✏️</span> New chat
-            </button>
-            
-            <div class="auth-section">
-                <button class="login-btn" id="google-login-button">
-                    <span class="icon">G</span> Sign in with Google
-                </button>
-                
-                <div class="user-details-display hidden" id="user-details-display">
-                    <div class="user-avatar" id="user-initials">--</div>
-                    <span class="user-name" id="user-display-name">Guest</span>
-                    <button class="logout-btn" id="logout-button">Logout</button>
-                </div>
-            </div>
+
 
             <nav class="sidebar-nav">
-                <a href="#" class="nav-link search-link">
-                    <span class="icon">🔍</span> Search chats
+                <a href="#" class="nav-link search-link top-search-link">
+                    <span class="icon"><i class="fas fa-magnifying-glass"></i></span> Search chats
                 </a>
 
                 <div class="chat-group" id="chats-list-container">
@@ -50,37 +44,100 @@
                     <p class="history-note">Sign in to view history.</p>
                 </div>
 
+
+
                 <div class="chat-group">
                     <div class="group-title">Cubies</div>
                     <a href="#" class="nav-link">
-                        <span class="icon">🖼️</span> Explore
+                        <span class="icon"><i class="fas fa-compass"></i></span> Explore
                     </a>
                     <a href="#" class="nav-link">
-                        <span class="icon" style="color: #00bcd4;">✨</span> Canva
+                        <span class="icon" style="color: #00bcd4;"><i class="fas fa-wand-magic-sparkles"></i></span>
+                        Canva
                     </a>
                 </div>
 
                 <a href="#" class="nav-link">
-                    <span class="icon">📚</span> Library
+                    <span class="icon"><i class="fas fa-book-open"></i></span> Library
                 </a>
                 <a href="#" class="nav-link">
-                    <span class="icon">📁</span> Projects
+                    <span class="icon"><i class="fas fa-folder"></i></span> Projects
                 </a>
+                <div class="chat-group">
+                    <div class="group-title">Others</div>
+                    <a href="#" class="nav-link">
+                        <span class="icon"><i class="fas fa-gear"></i></span> Settings
+                    </a>
+                    <a href="#" class="nav-link">
+                        <span class="icon"><i class="fas fa-circle-question"></i></span> Help
+                    </a>
+                </div>
 
             </nav>
-            
+
+
+            <div class="auth-section">
+                <button class="login-btn" id="google-login-button">
+                    <span class="icon">G</span> Sign in with Google
+                </button>
+
+                <div class="user-details-display hidden" id="user-details-display">
+                    <div class="user-avatar" id="user-avatar-initials">UN</div>
+                    <div class="user-name" id="user-display-name">Guest User</div>
+                    <button class="logout-btn" id="logout-button">Logout</button>
+                </div>
+            </div>
+
         </aside>
 
+        <div class="sidebar-overlay hidden-mobile" id="sidebar-overlay"></div>
 
         <main class="main-content">
             <header class="main-header">
+
+                <button class="menu-toggle-btn hidden-on-desktop" id="menu-toggle-button">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <div class="model-selector-container">
+                    <span class="model-name">Cube</span>
+                    <button class="model-dropdown-btn" id="model-dropdown-button">
+                        <span id="selected-model-version">AI Pro</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+
+                    <div class="model-dropdown-menu hidden" id="model-dropdown-menu">
+                        <div class="dropdown-header">Choose your model</div>
+
+                        <button class="dropdown-item" data-model="AI Flash">
+                            <div class="item-text">
+                                <div class="item-title">Fast all-round help</div>
+                                <div class="item-version">Cube AI Flash</div>
+                            </div>
+                        </button>
+
+                        <button class="dropdown-item" data-model="AI Pro">
+                            <div class="item-text">
+                                <div class="item-title">Reasoning, maths and code</div>
+                                <div class="item-version">Cube AI Pro</div>
+                            </div>
+                        </button>
+
+                        <div class="upgrade-section">
+                            <div class="upgrade-text">
+                                Upgrade to Cube AI Pro <br> Get our most capable models and features
+                            </div>
+                            <button class="upgrade-btn">Upgrade</button>
+                        </div>
+                    </div>
+                </div>
                 <div class="user-profile">
                     <p>Hello Cube</p>
                     <img src="cube.gif" alt="User Avatar" class="avatar">
                 </div>
             </header>
 
-            <section class="welcome-section">
+            <section class="welcome-section" id="welcome-section">
                 <div class="orange-orb"></div>
                 <h1 class="retro-text">Welcome To CUBE AI</h1>
                 <p class="sub-text">Please Sign in with Google to start chatting.</p>
@@ -89,18 +146,64 @@
             <section class="prompt-suggestions">
 
                 <div class="chat-display" id="main-chat-display">
-                    </div>
-
-                <div class="prompt-card chat-input-card">
-                    <textarea id="user-input" placeholder="Sign in to start chatting..." class="chat-input-field"
-                        rows="1" disabled></textarea>
-
-                    <button class="action-btn" disabled>
-                        <span class="icon">🤖</span> CUBE Beta
-                    </button>
-                    <button class="send-message-btn" id="send-button" disabled>↗</button>
                 </div>
 
+                <div class="chat-input-wrapper">
+                    <div class="prompt-card chat-input-card">
+
+                        <div class="input-controls-left">
+
+                            <div class="tools-menu file-tools-menu hidden" id="file-tools-menu">
+                                <button class="tool-item">
+                                    <span class="icon"><i class="fas fa-file-arrow-up"></i></span> Upload Files
+                                </button>
+                                <button class="tool-item">
+                                    <span class="icon"><i class="fas fa-cloud"></i></span> Add from Drive
+                                </button>
+                                <div class="tool-separator"></div>
+                                <button class="tool-item main-tool-toggle" id="file-toggle-button">
+                                    <span class="icon"><i class="fas fa-minus"></i></span> Collapse
+                                </button>
+                            </div>
+
+                            <button class="action-btn add-tool-btn" id="add-button" disabled>
+                                <span class="icon">+</span>
+                            </button>
+
+                            <div class="tools-menu ai-tools-menu hidden" id="tools-menu">
+                                <button class="tool-item">
+                                    <span class="icon"><i class="fas fa-image"></i></span> Create Image
+                                </button>
+                                <button class="tool-item">
+                                    <span class="icon"><i class="fas fa-palette"></i></span> Deep Search Canvas
+                                </button>
+                                <button class="tool-item">
+                                    <span class="icon"><i class="fas fa-graduation-cap"></i></span> Guided Learning
+                                </button>
+
+                                <div class="tool-separator"></div>
+                                <button class="tool-item main-tool-toggle" id="tools-toggle-button">
+                                    <span class="icon"><i class="fas fa-wrench"></i></span> Tools
+                                </button>
+                            </div>
+
+                            <button class="action-btn tools-pill-btn" id="tools-button" disabled>
+                                <i class="fas fa-tools"></i> Tools
+                            </button>
+                        </div>
+                        <textarea id="user-input" placeholder="Ask Cube anything..." class="chat-input-field" rows="1"
+                            disabled></textarea>
+
+                        <div class="input-controls-right">
+                            <button class="action-btn voice-input-btn" id="voice-input-button" disabled>
+                                <i class="fas fa-microphone"></i>
+                            </button>
+
+                            <button class="send-message-btn" id="send-button" disabled>
+                                <i class="fas fa-paper-plane"></i> </button>
+                        </div>
+                    </div>
+                </div>
             </section>
         </main>
     </div>
