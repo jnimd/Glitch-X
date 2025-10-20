@@ -23,7 +23,7 @@ const googleProvider = new firebase.auth.GoogleAuthProvider();
 // 2. GEMINI API CONFIG (ඔබ ලබා දුන් Key එක යොදා ඇත)
 // ... (UNTOUCHED)
 // ====================================================================
-const GEMINI_API_KEY = "";
+const GEMINI_API_KEY = "AIzaSyCh4lGPRj5Yq3BT-U6ElOSaBmrdCvRhM5U";
 const API_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + GEMINI_API_KEY;
 
 
@@ -607,3 +607,4 @@ if (loadingVideo && videoLoader && appContent) {
     });
 
 }
+
