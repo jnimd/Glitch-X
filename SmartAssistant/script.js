@@ -23,7 +23,7 @@ const googleProvider = new firebase.auth.GoogleAuthProvider();
 // 2. GEMINI API CONFIG (ඔබ ලබා දුන් Key එක යොදා ඇත)
 // ... (UNTOUCHED)
 // ====================================================================
-const GEMINI_API_KEY = "AIzaSyCh4lGPRj5Yq3BT-U6ElOSaBmrdCvRhM5U";
+const GEMINI_API_KEY = "";
 const API_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + GEMINI_API_KEY;
 
 
@@ -558,4 +558,52 @@ if (menuToggleBtn && mobileSidebar && sidebarOverlay) {
 
     // Overlay එක press කරද්දී sidebar එක close වෙන්න
     sidebarOverlay.addEventListener('click', toggleSidebar);
+}
+
+// ====================================================================
+// 💥 NEW: VIDEO LOADING SCREEN LOGIC
+// ====================================================================
+
+const videoLoader = document.getElementById('video-loader');
+const loadingVideo = document.getElementById('loading-video');
+const appContent = document.getElementById('app-content');
+
+if (loadingVideo && videoLoader && appContent) {
+    // 1. Video එක අවසන් වූ විට ක්‍රියාත්මක වන Event Listener එක
+    loadingVideo.addEventListener('ended', function () {
+        // A. Video Loader එක fade out කරන්න (CSS Transition භාවිතා කරමින්)
+        videoLoader.classList.add('fade-out');
+
+        // B. App Content එක පෙන්වන්න
+        appContent.classList.add('visible');
+
+        // C. (Optional) තත්පර 1කට පස්සේ loader එක DOM එකෙන් සම්පූර්ණයෙන්ම අයින් කරන්න
+        // (Transition එක ඉවර වෙන්න කාලය දෙනවා)
+        setTimeout(() => {
+            videoLoader.remove();
+        }, 1000);
+    });
+
+    // 2. Video එක Load නොවුණහොත් හෝ Error එකක් ආවොත්, Loader එක අයින් කර Content පෙන්වන්න
+    loadingVideo.addEventListener('error', function () {
+        console.error("Video loading error. Skipping video loader.");
+        videoLoader.classList.add('fade-out');
+        appContent.classList.add('visible');
+        setTimeout(() => {
+            videoLoader.remove();
+        }, 500);
+    });
+
+    // 3. User විසින් Page එක Skip කළොත් video එක play වෙන්න ඉඩ දෙන්න
+    // (මේක autoplay policies වලට වඩා හොඳයි)
+    document.addEventListener('DOMContentLoaded', () => {
+        loadingVideo.play().catch(error => {
+            // Autoplay blocked උනොත් (මුලින්ම play() call කරන නිසා)
+            console.warn("Autoplay was prevented. User interaction required or check browser policy.", error);
+            // අවශ්‍ය නම්, මේ අවස්ථාවේදීත් loading screen එක skip කරන්න පුළුවන්.
+            // videoLoader.classList.add('fade-out');
+            // appContent.classList.add('visible');
+        });
+    });
+
 }
