@@ -1045,37 +1045,66 @@ body {
         overflow: hidden;
     }
 
-    /* Sidebar fixed on mobile (keep as you had, but ensure it overlays correctly) */
     .sidebar {
-        display: block;
         position: fixed;
-        left: 0;
         top: 0;
-        height: 100vh;
-        z-index: 100;
+        left: 0;
         width: 280px;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--bg-color, #0d1117);
+        box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+        border: none;
+        z-index: 100;
         transform: translateX(-100%);
         transition: transform 0.3s ease-in-out;
-        border-radius: 0;
-        border: none;
-        box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
-        overflow-y: auto;
-        /* enables vertical scrolling */
-        -webkit-overflow-scrolling: touch;
-        /* smooth scroll for iOS */
     }
 
     .sidebar:not(.closed-mobile) {
         transform: translateX(0);
     }
 
-    .sidebar-overlay {
-        display: none;
+    /* scrollable middle area */
+    .sidebar-content {
+        flex: 1;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 16px 12px 80px;
+        /* leave space for footer */
     }
 
-    .sidebar-overlay.visible-mobile {
-        display: block;
+    /* 👉 fixed footer (Google login stays always visible) */
+    .sidebar-footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 280px;
+        /* match sidebar width */
+        background: rgba(13, 17, 23, 0.98);
+        backdrop-filter: blur(8px);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 10px 16px;
+        box-sizing: border-box;
+        z-index: 200;
     }
+
+    .sidebar-footer button {
+        width: 100%;
+        padding: 12px 0;
+        border: none;
+        border-radius: 8px;
+        font-size: 1em;
+        font-weight: 600;
+        color: #fff;
+        background: linear-gradient(90deg, #ff9900, #ff6600);
+        cursor: pointer;
+    }
+
+    .sidebar-footer button:active {
+        transform: scale(0.97);
+    }
+
 
     /* Make main content take the viewport width (you previously had 160% which caused overflow/scroll issues) */
     .main-content {
@@ -1218,4 +1247,93 @@ body {
         padding: 12px 15px;
     }
 
+}
+
+/* ==== Extra small phones (max-width: 400px) ==== */
+@media (max-width: 400px) {
+
+    .sidebar {
+        width: 240px;
+    }
+
+    .sidebar-content {
+        padding: 12px 10px 70px;
+    }
+
+    .sidebar-footer {
+        width: 240px;
+        /* match new sidebar width */
+        padding: 8px 12px;
+    }
+
+    .sidebar-footer button {
+        font-size: 0.9em;
+        padding: 10px;
+
+    }
+
+    /* adjust header paddings / text sizes */
+    .main-header {
+        padding: 8px 10px;
+        gap: 8px;
+    }
+
+    .main-header .model-selector-container .model-name {
+        font-size: 0.9em;
+    }
+
+    .main-header .user-profile .avatar {
+        width: 30px;
+        height: 30px;
+    }
+
+    /* make chat input and buttons slightly smaller */
+    .chat-input-wrapper {
+        padding: 8px;
+    }
+
+    .chat-input-card {
+        padding: 20px 12px;
+    }
+
+    .chat-input-field {
+        font-size: 0.9em;
+        padding: 8px;
+    }
+
+    .input-controls-right .action-btn,
+    .input-controls-right .send-message-btn {
+        width: 32px;
+        height: 32px;
+    }
+
+    /* prevent layout overflow */
+    .app-container,
+    .main-content {
+        width: 145%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        border: none;
+    }
+
+    /* make fonts adaptive globally */
+    body {
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    .welcome-section .retro-text {
+        font-size: 18px;
+    }
+
+    .welcome-section .sub-text {
+        font-size: 0.8em;
+    }
+
+    /* Optional - reduce sidebar shadow for small viewports */
+    .sidebar {
+        box-shadow: 6px 0 20px rgba(0, 0, 0, 0.4);
+    }
 }
