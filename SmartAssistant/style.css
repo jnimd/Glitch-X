@@ -1337,3 +1337,26 @@ body {
         box-shadow: 6px 0 20px rgba(0, 0, 0, 0.4);
     }
 }
+
+/* 3. Full HD Desktop (1601px up to 1920px) */
+/* 100% Zoom හි ඇති Full HD තිර (1920px) සඳහා හොඳම අගය */
+@media (min-width: 1601px) and (max-width: 1920px) {
+  body {
+    /* තවත් වැඩි කළ pixel ප්‍රමාණය */
+    background-size: 19px 19px;
+  }
+}
+
+/* 4. Large Monitors / Ultra Wide / 4K (1921px සහ ඊට වැඩි) */
+/* 80% Zoom හෝ ඊට වැඩි විශාල තිර සඳහා */
+@media (min-width: 1921px) {
+  body {
+    /* විශාලතම pixel ප්‍රමාණය */
+    background-size: 22px 22px;
+  }
+}
+
+/* =========================================== */
+/* MUSIC PLAYER - New Styles (Transparent Card) */
+/* =========================================== */
+
