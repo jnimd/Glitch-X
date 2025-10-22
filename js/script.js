@@ -229,3 +229,220 @@ menuItems.forEach(item => {
   });
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+  // ===========================================
+  // 1. PLAYLIST DEFINITION (ඔබේ විස්තර ඇතුලත් කර ඇත)
+  // ===========================================
+  const playlist = [
+    {
+      title: "GlitchX Horizon",
+      artist: "Jnim",
+      src: "audio/Glitch1.mp3", // ⬅️ ඔබේ පළවෙනි සින්දුවේ path එක
+      headerTitle: "GlitchX Gramophone",
+      albumArt: "images/your_album_art_1.png" // ⬅️ පලවෙනි සින්දුවේ cover photo eka
+    },
+    {
+      title: "Track 02",
+      artist: "Jnim",
+      src: "audio/Glitch2.mp3", // ⬅️ ඔබේ දෙවෙනි සින්දුවේ path එක
+      headerTitle: "GLITCH X Track",
+      albumArt: "images/your_album_art_2.png" // ⬅️ දෙවෙනි සින්දුවේ cover photo eka
+    }
+  ];
+
+  let currentTrackIndex = 0;
+  let isPlaying = false;
+  let lastVolume = 0.7; // Default volume 
+
+  // ===========================================
+  // 2. HTML Elements Selection
+  // ===========================================
+  const audio = document.getElementById('background-music');
+  const togglePlayBtn = document.getElementById('toggle-play-btn');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+  const progressBar = document.getElementById('progress-bar');
+  const currentTimeSpan = document.getElementById('current-time');
+  const durationSpan = document.getElementById('duration');
+  const volumeBar = document.getElementById('volume-bar');
+  const muteBtn = document.getElementById('mute-btn');
+  const headerTitleEl = document.getElementById('header-song-title');
+  const currentTitleEl = document.getElementById('current-song-title');
+  const currentArtistEl = document.getElementById('current-artist-name');
+  const albumArtEl = document.getElementById('player-album-art');
+
+
+  // ===========================================
+  // 3. Core Player Functions
+  // ===========================================
+
+  function updatePlayPauseIcon() {
+    if (isPlaying) {
+      togglePlayBtn.innerHTML = '<i class="fas fa-pause"></i>';
+    } else {
+      togglePlayBtn.innerHTML = '<i class="fas fa-play"></i>';
+    }
+  }
+
+  function loadTrack(index) {
+    const track = playlist[index];
+
+    audio.src = track.src;
+    headerTitleEl.textContent = track.headerTitle;
+    currentTitleEl.textContent = track.title;
+    currentArtistEl.textContent = track.artist;
+    albumArtEl.src = track.albumArt;
+
+    audio.load(); // අලුත් track එක browser එකට load කරන්න
+
+    // Time display එක reset කරන්න
+    updateTimeDisplay(0, 0);
+    progressBar.value = 0;
+
+    // 💡💡💡 AUTOPLAY FIX: Track මාරු කළ පසු, කලින් play වෙමින් තිබ්බේ නම්, නැවත play කරන්න 💡💡💡
+    if (isPlaying) {
+      audio.play().catch(e => console.warn('Autoplay was prevented by the browser on track change.', e));
+    }
+  }
+
+  function nextTrack() {
+    currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+    loadTrack(currentTrackIndex);
+    audio.play().catch(e => console.log('Play failed after track change:', e));
+    isPlaying = true;
+    updatePlayPauseIcon();
+  }
+
+  function prevTrack() {
+    currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
+    loadTrack(currentTrackIndex);
+    audio.play().catch(e => console.log('Play failed after track change:', e));
+    isPlaying = true;
+    updatePlayPauseIcon();
+  }
+
+
+  // ===========================================
+  // 4. Initial Load & Autoplay Logic (Autoplay Start එක මෙන්න)
+  // ===========================================
+
+  // 1. Player එක load වෙද්දි පළවෙනි track එක load කරන්න
+  loadTrack(currentTrackIndex);
+
+  // 2. 🎯 පළමු වරට play වෙන්න උත්සාහ කිරීම (Autoplay)
+  // Browser එකේ autoplay policy එක මේකෙන් bypass කරන්න try කරනවා
+  audio.play().then(() => {
+    isPlaying = true;
+    updatePlayPauseIcon(); // Pause icon එක පෙන්වන්න
+  }).catch(error => {
+    // Autoplay fail උනොත්, Play icon එක පෙන්වන්න, user click එකක් එනකම් ඉන්න
+    isPlaying = false;
+    updatePlayPauseIcon();
+    console.warn("Autoplay blocked. Waiting for user interaction to start music.");
+  });
+
+
+  // 3. Browser Autoplay Block කළොත්, user click කරපු ගමන් play කරන්න
+  document.body.addEventListener('click', function attemptPlay() {
+    if (audio.paused) {
+      audio.play().then(() => {
+        isPlaying = true;
+        updatePlayPauseIcon();
+      }).catch(error => {
+        console.log("Autoplay still blocked, or an error occurred:", error);
+      });
+    }
+    // පළමු click එකෙන් පසු listener එක ඉවත් කරන්න
+    document.body.removeEventListener('click', attemptPlay);
+  });
+
+  // ===========================================
+  // 5. Event Listeners
+  // ===========================================
+
+  // Play/Pause button eka
+  togglePlayBtn.addEventListener('click', () => {
+    if (isPlaying) {
+      audio.pause();
+      isPlaying = false;
+    } else {
+      audio.play();
+      isPlaying = true;
+    }
+    updatePlayPauseIcon();
+  });
+
+  nextBtn.addEventListener('click', nextTrack);
+  prevBtn.addEventListener('click', prevTrack);
+  audio.addEventListener('ended', nextTrack);
+
+
+  // Progress Bar Logic
+  audio.addEventListener('timeupdate', () => {
+    const progress = (audio.currentTime / audio.duration) * 100;
+    progressBar.value = progress;
+    updateTimeDisplay(audio.currentTime, audio.duration);
+  });
+
+  audio.addEventListener('loadedmetadata', () => {
+    updateTimeDisplay(audio.currentTime, audio.duration);
+    progressBar.max = audio.duration;
+    progressBar.value = audio.currentTime;
+  });
+
+  progressBar.addEventListener('input', () => {
+    const seekTime = (progressBar.value / 100) * audio.duration;
+    audio.currentTime = seekTime;
+  });
+
+
+  // Volume Control Logic
+  audio.volume = 0.7;
+  volumeBar.value = 70;
+
+  volumeBar.addEventListener('input', () => {
+    audio.volume = volumeBar.value / 100;
+    updateMuteButtonIcon();
+    lastVolume = audio.volume;
+  });
+
+  muteBtn.addEventListener('click', () => {
+    if (audio.volume > 0) { // Mute karanna
+      lastVolume = audio.volume;
+      audio.volume = 0;
+      volumeBar.value = 0;
+    } else { // Unmute karanna
+      audio.volume = lastVolume > 0 ? lastVolume : 0.7;
+      volumeBar.value = audio.volume * 100;
+    }
+    updateMuteButtonIcon();
+  });
+
+
+  // ===========================================
+  // 6. Utility Functions (Time/Volume Display)
+  // ===========================================
+
+  function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+  }
+
+  function updateTimeDisplay(currentTime, duration) {
+    currentTimeSpan.textContent = formatTime(currentTime);
+    durationSpan.textContent = isNaN(duration) ? '0:00' : formatTime(duration);
+  }
+
+  function updateMuteButtonIcon() {
+    if (audio.volume === 0) {
+      muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+    } else if (audio.volume < 0.5) {
+      muteBtn.innerHTML = '<i class="fas fa-volume-down"></i>';
+    } else {
+      muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+    }
+  }
+  updateMuteButtonIcon();
+
+});
